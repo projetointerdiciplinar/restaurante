@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <nav class="aw-menu">
+        <ul>
+            <li>
+                <h:link outcome="/sistema/dashboard"><i class="fa fa-fw fa-dashboard"></i>Dashboard</h:link>
+            </li>
+            <li>
+                <h:link styleClass="aw-item-link"><i class="fa fa-fw fa-bullhorn"></i>Recursos Humano <i class="fa fa-fw fa-angle-left pull-right"></i></h:link>
+                <ul class="aw-menu-tree">                  
+                    <li class="subitem"><h:link outcome="/rh/relacaoFuncaoTreinamento" ><i class="fa fa-fw fa-exchange"></i>Relacionar</h:link></li>
+                </ul>
+            </li>
+            <li>
+                <h:link styleClass="aw-item-link"><i class="fa fa-bar-chart"></i>Relatórios <i class="fa fa-fw fa-angle-left pull-right"></i></h:link>
+                <ul class="aw-menu-tree">
+                    <li class="subitem"><h:link outcome="/rh/treinamento" ><i class="fa fa-fw fa-mortar-board"></i>Treinamento</h:link></li>
+                    <li class="subitem"><h:link outcome="/rh/colaboradorTreinamento" ><i class="fa fa-fw fa-user"></i>Colaborador</h:link></li>                 
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+</ui:composition>

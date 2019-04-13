@@ -1,0 +1,39 @@
+/* BASE */
+body {
+    margin: 0;
+    font-size: 13px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* TABVIEW */
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a {
+    color: #555;
+}
+
+@media (max-width: 640px) {
+    .ui-tabs.ui-tabs-top > .ui-tabs-nav li {
+        width: 100%;
+    }
+}
+
+/* PANELGRID */
+.ui-panelgrid.panelgrid-noborder .ui-grid-responsive {
+    border: none;
+}
+
+@media (max-width: 640px) {
+    .ui-panelgrid.panelgrid-noborder .ui-grid-responsive .ui-grid-row {
+        border: none;
+    }
+}
+
+
+/* COR DA TABELA SELECIONANDO E BOTÃO AO CLICAR A FONTE ALTERA DE COR */
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    background-color: #1e94d2;
+    color: #fff;
+}
+
+body .ui-datatable .ui-datatable-data>tr.ui-datatable-selectable.ui-state-highlight .ui-chkbox>.ui-corner-all.ui-state-active {
+    border-color: #fff;
+}

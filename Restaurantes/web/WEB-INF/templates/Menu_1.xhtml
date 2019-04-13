@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <nav class="aw-menu">
+        <ul>
+            <li>
+                <h:link outcome="/sistema/dashboard"><i class="fa fa-fw fa-dashboard"></i>Dashboard</h:link>
+            </li>
+
+            <li>
+                <h:link styleClass="aw-item-link" ><i class="fa fa-fw fa-plus-square"></i>Cadastros <i class="fa fa-fw fa-angle-left pull-right"></i></h:link>
+                <ul class="aw-menu-tree">
+
+                    <li class="subitem"><h:link outcome="/sistema/computador" ><i class="fa fa-fw fa-desktop"></i>Computador</h:link></li>
+                    <li class="subitem"><h:link outcome="/sistema/software" ><i class="fa fa-fw fa-buysellads"></i>Software</h:link></li>
+                    <li class="subitem"><h:link outcome="/sistema/tipoSoftware" ><i class="fa fa-fw fa-copyright"></i>Tipo Software</h:link></li>
+                    <li class="subitem"><h:link outcome="/sistema/tipoLicenca" ><i class="fa fa-fw fa-windows"></i>Tipo Licença</h:link></li>
+                    <li class="subitem"><h:link outcome="/sistema/marca" ><i class="fa fa-fw fa-copyright"></i>Marca</h:link></li> 
+                </ul>
+            </li>
+            <li>
+                <h:link styleClass="aw-item-link"><i class="fa fa-fw fa-cog"></i>Licenças <i class="fa fa-fw fa-angle-left pull-right"></i></h:link>
+                <ul class="aw-menu-tree">
+                    <li class="subitem"><h:link outcome="/sistema/openLicense" ><i class="fa fa-fw fa-cloud-download"></i>Open License</h:link></li>                    
+                    <li class="subitem"><h:link outcome="/sistema/computadorSoftware" ><i class="fa fa-fw fa-clipboard"></i>PC + Software</h:link></li>
+                </ul>
+            </li>
+            <li>
+                <h:link styleClass="aw-item-link"><i class="fa fa-fw fa-file-text"></i>Lista de IPs <i class="fa fa-fw fa-angle-left pull-right"></i></h:link>
+                <ul class="aw-menu-tree">
+                    <li class="subitem"><h:link outcome="/sistema/ip" ><i class="fa fa-fw fa-indent"></i>IP</h:link></li>
+                    <li class="subitem"><h:link styleClass="aw-item-link" ><i class="fa  fa-fw fa-user-times"></i>Teste Menu</h:link></li>
+                </ul>
+            </li>
+            <li>
+                <h:link styleClass="aw-item-link"><i class="fa fa-fw fa-pagelines"></i>Agrícola <i class="fa fa-fw fa-angle-left pull-right"></i></h:link>
+                <ul class="aw-menu-tree">
+                    <li class="subitem"><h:link outcome="/agricola/canaDiaFrente" styleClass="aw-item-link" ><i class="fa fa-fw fa-sun-o"></i>Cana Dia Frente</h:link></li>
+                    <li class="subitem"><h:link outcome="/agricola/canaDiaHora" styleClass="aw-item-link" ><i class="fa fa-fw fa-clock-o"></i>Cana Dia Hora</h:link></li>                  
+                </ul>
+            </li>
+            <li>
+                <h:link styleClass="aw-item-link"><i class="fa fa-fw fa-bullhorn"></i>Recursos Humano <i class="fa fa-fw fa-angle-left pull-right"></i></h:link>
+                <ul class="aw-menu-tree">
+                    <li class="subitem"><h:link outcome="/rh/treinamento" ><i class="fa fa-fw fa-mortar-board"></i>Treinamento</h:link></li>
+                    <li class="subitem"><h:link outcome="/rh/relacaoFuncaoTreinamento" ><i class="fa fa-fw fa-exchange"></i>Relacionar</h:link></li>
+                    <li class="subitem"><h:link outcome="/rh/colaboradorTreinamento" ><i class="fa fa-fw fa-user"></i>Colaborador</h:link></li>
+                </ul>
+            </li>
+            <li>
+                <h:link styleClass="aw-item-link"><i class="fa fa-bar-chart"></i>Relatórios <i class="fa fa-fw fa-angle-left pull-right"></i></h:link>
+                <ul class="aw-menu-tree">
+                    <li class="subitem"><h:link outcome="/sistema/colab" ><i class="fa fa-fw fa-users"></i>Colaboradores</h:link></li>
+                    <li class="subitem"><h:link outcome="/sistema/nf" ><i class="fa fa-fw fa-file-text"></i>Nota Fiscal</h:link></li>
+                    <li class="subitem"><h:link outcome="/sistema/colab" ><i class="fa fa-fw fa-print"></i>Impressoras</h:link></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+</ui:composition>
