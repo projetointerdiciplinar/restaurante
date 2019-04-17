@@ -15,98 +15,89 @@
                         <p:panelGrid columns="6" layout="grid" 
                                      columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-1,ui-g-12 ui-md-1,ui-g-12 ui-md-4,ui-g-12 ui-md-1,ui-g-12 ui-md-4"
                                      styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">                                                  
-                          
+
                             <p:outputLabel for="codigo" value="Código:" />
                             <p:inputText id="codigo" value="" />
-                            
+
                             <p:outputLabel for="nome" value="Nome:" />
                             <p:inputText id="nome" value="" />
-                            
-                            
+
+
                             <p:outputLabel for="apelido" value="Apelido:" />
                             <p:inputText id="apelido" value=""/>
-                            
-                            </p:panelGrid >
-                            
-                            <p:panelGrid columns="8" layout="grid" 
+
+                        </p:panelGrid >
+
+                        <p:panelGrid columns="8" layout="grid" 
                                      columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-2,ui-g-12 ui-md-1,ui-g-12 ui-md-2,ui-g-12 ui-md-1,ui-g-12 ui-md-2,ui-g-12 ui-md-1,ui-g-12 ui-md-2"
                                      styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">                  
-                            
-                             <p:outputLabel for="CPF" value="CPF:" />
-                            <p:inputMask id="CPF" value="#{maskView.CPF}" mask="000000000-00"/>
-                            
+
+                            <p:outputLabel for="CPF" value="CPF:" />
+                            <p:inputMask id="CPF" value="" mask="000.000.000-00"/>
+
                             <p:outputLabel for="RG" value="RG:" />
                             <p:inputText id="RG" value="" />
-                            
-                                                        
-                             <p:outputLabel for="endereco" value="Endereço:" />
+
+
+                            <p:outputLabel for="endereco" value="Endereço:" />
                             <p:inputText id="endereco" value="" />
-                            
-                             <p:outputLabel for="numero" value="Número:" />
+
+                            <p:outputLabel for="numero" value="Número:" />
                             <p:inputText id="numero" value="" />
-                            
-                             <p:outputLabel for="bairro" value="Bairro:" />
+
+                            <p:outputLabel for="bairro" value="Bairro:" />
                             <p:inputText id="bairro" value="" />
-                            
+
                             <p:outputLabel for="cidade" value="Cidade:" />
                             <p:inputText id="cidade" value="" />
-                            
+
                             <p:outputLabel for="CEP" value="CEP:" />
                             <p:inputText id="CEP" value="" />
-                            
-                             
-        <p:outputLabel for="console" value="Estado:" />
-        <p:selectOneMenu id="console" value="#{selectOneMenuView.console}" >
-            <f:selectItem itemLabel="Selecione Estado" itemValue="" />
-            <f:selectItem itemLabel="AC" itemValue="AC" />
-            <f:selectItem itemLabel="AL" itemValue="AL" />
-            <f:selectItem itemLabel="AP" itemValue="AP" />
-            <f:selectItem itemLabel="AM" itemValue="AM" />
-            <f:selectItem itemLabel="BA" itemValue="BA" />
-            <f:selectItem itemLabel="CE" itemValue="CE" />
-            <f:selectItem itemLabel="DF" itemValue="DF" />
-            <f:selectItem itemLabel="ES" itemValue="ES" />
-            <f:selectItem itemLabel="GO" itemValue="GO" />
-            <f:selectItem itemLabel="MA" itemValue="MA" />
-            <f:selectItem itemLabel="MT" itemValue="MT" />
-            <f:selectItem itemLabel="MS" itemValue="MS" />
-            <f:selectItem itemLabel="MG" itemValue="MG" />
-            <f:selectItem itemLabel="PA" itemValue="PA" />
-            <f:selectItem itemLabel="PB" itemValue="PB" />
-            <f:selectItem itemLabel="PR" itemValue="PR" />
-            <f:selectItem itemLabel="PE" itemValue="PE" />
-            <f:selectItem itemLabel="PI" itemValue="PI" />
-            <f:selectItem itemLabel="RJ" itemValue="RJ" />
-            <f:selectItem itemLabel="RN" itemValue="RN" />
-            <f:selectItem itemLabel="RS" itemValue="RS" />
-            <f:selectItem itemLabel="RO" itemValue="RO" />
-            <f:selectItem itemLabel="RR" itemValue="RR" />
-            <f:selectItem itemLabel="SC" itemValue="SC" />
-            <f:selectItem itemLabel="SP" itemValue="SP" />
-            <f:selectItem itemLabel="SE" itemValue="SE" />
-            <f:selectItem itemLabel="TO" itemValue="TO" />
-        </p:selectOneMenu>
-        
+
+
+                            <p:outputLabel for="console" value="Estado:" />
+                            <p:selectOneMenu id="console" value="" >
+                                <f:selectItem itemLabel="Selecione Estado" itemValue="" />
+                                <f:selectItem itemLabel="AC" itemValue="AC" />
+                                <f:selectItem itemLabel="AL" itemValue="AL" />
+                                <f:selectItem itemLabel="AP" itemValue="AP" />
+                                <f:selectItem itemLabel="AM" itemValue="AM" />
+                                <f:selectItem itemLabel="BA" itemValue="BA" />
+                                <f:selectItem itemLabel="CE" itemValue="CE" />
+                                <f:selectItem itemLabel="DF" itemValue="DF" />
+                                <f:selectItem itemLabel="ES" itemValue="ES" />
+                                <f:selectItem itemLabel="GO" itemValue="GO" />
+                                <f:selectItem itemLabel="MA" itemValue="MA" />
+                                <f:selectItem itemLabel="MT" itemValue="MT" />
+                                <f:selectItem itemLabel="MS" itemValue="MS" />
+                                <f:selectItem itemLabel="MG" itemValue="MG" />
+                                <f:selectItem itemLabel="PA" itemValue="PA" />
+                                <f:selectItem itemLabel="PB" itemValue="PB" />
+                                <f:selectItem itemLabel="PR" itemValue="PR" />
+                                <f:selectItem itemLabel="PE" itemValue="PE" />
+                                <f:selectItem itemLabel="PI" itemValue="PI" />
+                                <f:selectItem itemLabel="RJ" itemValue="RJ" />
+                                <f:selectItem itemLabel="RN" itemValue="RN" />
+                                <f:selectItem itemLabel="RS" itemValue="RS" />
+                                <f:selectItem itemLabel="RO" itemValue="RO" />
+                                <f:selectItem itemLabel="RR" itemValue="RR" />
+                                <f:selectItem itemLabel="SC" itemValue="SC" />
+                                <f:selectItem itemLabel="SP" itemValue="SP" />
+                                <f:selectItem itemLabel="SE" itemValue="SE" />
+                                <f:selectItem itemLabel="TO" itemValue="TO" />
+                            </p:selectOneMenu>
+
                             <p:outputLabel for="telefone" value="Telefone:" />
                             <p:inputText id="telefone" value="" />
-                            
+
                             <p:outputLabel for="celular" value="Celular:" />
                             <p:inputText id="celular" value="" />
-                            
+
                             <p:outputLabel for="email" value="Email:" />
-                            <p:inputText id="email" value="" />
- 
-                           
-                            
-                            
-                            
-                            
-                            
-                             
-                           
+                            <p:inputText id="email" value="" />                           
                             <p:outputLabel/>
                         </p:panelGrid >
-                        
+
                         <br/>
                         <p:panelGrid columns="5" layout="grid"
                                      columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-4"
@@ -114,7 +105,7 @@
                             <p:commandButton value="Salvar" update="formMarca, formMarca2"
                                              icon="fa fa-check" actionListener="#{marcaMB.gravar}"/>
                             <p:commandButton value="Cancelar" icon="fa fa-close" onclick="history.go(0); return false;"/>
-                            
+
                         </p:panelGrid>
                     </div>
                 </p:panel>
@@ -144,7 +135,10 @@
                                 </p:inputText>
                             </p:outputPanel>
                         </f:facet>
-                        <p:column headerText="Marca" width="100" sortBy="#{marca.descricao}">
+                        <p:column headerText="Nome" width="20" sortBy="#{marca.descricao}">
+                            <h:outputText value="#{marca.descricao}"/>
+                        </p:column> 
+                        <p:column headerText="Apelido" width="10" sortBy="#{marca.descricao}">
                             <h:outputText value="#{marca.descricao}"/>
                         </p:column> 
                         <p:column style="text-align: center; width:1%">                                   
