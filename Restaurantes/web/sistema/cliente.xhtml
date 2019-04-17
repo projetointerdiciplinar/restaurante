@@ -5,10 +5,10 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/templates/Layout.xhtml">
 
-    <ui:define name="title-tab">Cadastro de Clientess</ui:define>
+    <ui:define name="title-tab">Cadastro de Clientes</ui:define>
     <ui:define name="content">       
         <div class="ui-g-12">
-            <h:form id="formMarca">
+            <h:form id="formCliente">
                 <p:messages id="menssagem" showDetail="true" closable="true"/>  
                 <p:panel id="basic" header="Cadastro de Clientes" style="margin-bottom:100px">
                     <div class="ui-fluid">
@@ -51,8 +51,8 @@
                             <p:outputLabel for="cidade" value="Cidade:" />
                             <p:inputText id="cidade" value="" />
 
-                            <p:outputLabel for="CEP" value="CEP:" />
-                            <p:inputText id="CEP" value="" />
+                            <p:outputLabel for="cep" value="CEP:" />
+                            <p:inputText id="cep" value="" />
 
 
                             <p:outputLabel for="console" value="Estado:" />
@@ -102,7 +102,7 @@
                         <p:panelGrid columns="5" layout="grid"
                                      columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-4"
                                      styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">
-                            <p:commandButton value="Salvar" update="formMarca, formMarca2"
+                            <p:commandButton value="Salvar" update="formCliente, formCliente2"
                                              icon="fa fa-check" actionListener="#{marcaMB.gravar}"/>
                             <p:commandButton value="Cancelar" icon="fa fa-close" onclick="history.go(0); return false;"/>
 
@@ -110,17 +110,17 @@
                     </div>
                 </p:panel>
             </h:form>
-            <h:form id="formMarca2">
+            <h:form id="formCliente2">
                 <div class="card card-w-title">
-                    <p:dataTable id="idTabela" value="#{marcaMB.listarMarca}" var="marca" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}  {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    <p:dataTable id="idTabela" value="#{marcaMB.listarMarca}" var="cliente" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}  {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="10,20,30,50" emptyMessage="Nenhuma informação..." style="margin-bottom: 30px; margin-top: 5px" reflow="true" >
                         <f:facet name="header">
                             <p:outputPanel style="float:left;margin-top: 4px">                                       
                                 <h:commandLink title="Baixar em Excel" ><i class="fa fa-file-excel-o"></i>
-                                    <p:dataExporter type="xls" target="idTabela" fileName="relatorioMarca"/>
+                                    <p:dataExporter type="xls" target="idTabela" fileName="relatorioCliente"/>
                                 </h:commandLink><p:spacer width="10" height="5" />
                                 <h:commandLink title="Baixar em CSV" ><i class="fa fa-file-text-o"></i>
-                                    <p:dataExporter type="csv" target="idTabela" fileName="relatorioMarca" />
+                                    <p:dataExporter type="csv" target="idTabela" fileName="relatorioCliente" />
                                 </h:commandLink><p:spacer width="10" height="5" />
                                 <h:commandLink title="Baixar em PDF" id="marca"><i class="fa fa-file-pdf-o"></i>
                                     <p:fileDownload value="#{marcaMB.relatorio}" />
@@ -131,23 +131,29 @@
 
                                 <p:spacer width="5"></p:spacer>
                                 <p:inputText id="globalFilter"  style="width:200px" placeholder="Pesquisar...">
-                                    <p:ajax event="change" update="formMarca2:idTabela"  process="@this" />
+                                    <p:ajax event="change" update="formCliente2:idTabela"  process="@this" />
                                 </p:inputText>
                             </p:outputPanel>
                         </f:facet>
-                        <p:column headerText="Nome" width="20" sortBy="#{marca.descricao}">
+                        <p:column headerText="Nome" width="2" sortBy="#{marca.descricao}">
                             <h:outputText value="#{marca.descricao}"/>
                         </p:column> 
-                        <p:column headerText="Apelido" width="10" sortBy="#{marca.descricao}">
+                        <p:column headerText="Apelido" width="2" sortBy="#{marca.descricao}">
+                            <h:outputText value="#{marca.descricao}"/>
+                            </p:column> 
+                            <p:column headerText="CPF" width="2" sortBy="#{marca.descricao}">
+                            <h:outputText value="#{marca.descricao}"/>
+                            </p:column> 
+                            <p:column headerText="CEP" width="2" sortBy="#{marca.descricao}">
                             <h:outputText value="#{marca.descricao}"/>
                         </p:column> 
                         <p:column style="text-align: center; width:1%">                                   
-                            <p:commandLink title="Editar" id="alterar" actionListener="#{marcaMB.alterar()}" update="formMarca, formMarca2" process="@this">
+                            <p:commandLink title="Editar" id="alterar" actionListener="#{marcaMB.alterar()}" update="formCliente, formCliente2" process="@this">
                                 <i class="fa fa-pencil-square-o" style="color: dodgerblue" ></i>
                             </p:commandLink>                                 
                         </p:column>
                         <p:column style="text-align: center; width:1%">                                   
-                            <p:commandLink title="Excluir" id="excluir" actionListener="#{marcaMB.excluir()}" update="formMarca, formMarca2" process="@this">
+                            <p:commandLink title="Excluir" id="excluir" actionListener="#{marcaMB.excluir()}" update="formCliente, formCliente2" process="@this">
                                 <i class="fa fa-trash" style="color: red"></i>
                                 <p:confirm header="Confirmação" message="Você tem certeza ?" icon="ui-icon-alert"/>
                             </p:commandLink>
