@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,51 +26,45 @@ public class Pessoa implements Serializable {
     private int idPessoa;
     @Column(name = "nome", nullable = false)
     private String nome;
-    @Column(name = "cpf", nullable = false)
+    @Column(name = "cpf", nullable = true)
     private String cpf;
-    @Column(name = "telefone", nullable = false)
+    @Column(name = "telefone", nullable = true)
     private String telefone;
-    @Column(name = "celular", nullable = false)
+    @Column(name = "celular", nullable = true)
     private String celular;
-    @Column(name = "data_nasc", nullable = false)
+    @Column(name = "data_nasc", nullable = true)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataNascimento;
-    @Column(name = "sexo", nullable = false)
+    @Column(name = "sexo", nullable = true)
     private String sexo;
-    @Column(name = "senha", nullable = false)
+    @Column(name = "senha", nullable = true)
     private String senha;
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = true)
     private String email;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", nullable = false, foreignKey = @ForeignKey(name = "id_pessoa_usuario"))
     private Usuario usuario;
     
     
     
-    @Column(name = "rg", nullable = false)
+    @Column(name = "rg", nullable = true)
     private String rg;
-    @Column(name = "endereco", nullable = false)
+    @Column(name = "endereco", nullable = true)
     private String endereco;
-    @Column(name = "numero", nullable = false)
+    @Column(name = "numero", nullable = true)
     private String numero;
-    @Column(name = "bairro", nullable = false)
+    @Column(name = "bairro", nullable = true)
     private String bairro;
-    @Column(name = "cidade", nullable = false)
+    @Column(name = "cidade", nullable = true)
     private String cidade;
-    @Column(name = "cep", nullable = false)
+    @Column(name = "cep", nullable = true)
     private String cep;
-    @Column(name = "estado", nullable = false)
+    @Column(name = "estado", nullable = true)
     private String estado;
     
-    
-    @Column(name = "produtoPorEmail", nullable = false)
-    private String produtoPorEmail;
-    @Column(name = "tipo", nullable = false)
+    @Column(name = "tipo", nullable = true)
     private String tipo;
 
-    @Transient
-    private String confirmaSenha;
-    private String confirmaEmail;
 
     public String getSexo() {
         return sexo;
@@ -186,28 +181,12 @@ public class Pessoa implements Serializable {
         this.email = email;
     }
 
-    public String getProdutoPorEmail() {
-        return produtoPorEmail;
-    }
-
-    public void setProdutoPorEmail(String produtoPorEmail) {
-        this.produtoPorEmail = produtoPorEmail;
-    }
-
     public String getTipo() {
         return tipo;
     }
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public String getConfirmaSenha() {
-        return confirmaSenha;
-    }
-
-    public void setConfirmaSenha(String confirmaSenha) {
-        this.confirmaSenha = confirmaSenha;
     }
 
     public Date getDataNascimento() {
@@ -224,14 +203,6 @@ public class Pessoa implements Serializable {
 
     public void setIdPessoa(int idPessoa) {
         this.idPessoa = idPessoa;
-    }
-
-    public String getConfirmaEmail() {
-        return confirmaEmail;
-    }
-
-    public void setConfirmaEmail(String confirmaEmail) {
-        this.confirmaEmail = confirmaEmail;
     }
 
     public Usuario getUsuario() {

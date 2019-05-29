@@ -121,9 +121,18 @@
                 <p:messages id="messages" showDetail="true" autoUpdate="true" /> 
                 <p:commandButton value="Entrar" actionListener="#{loginMB.login}" ajax="false"/>
                 <br /><br />
-                <p:commandButton value="Cadastrar" action="/cadastro/cliente.xhtml" onclick="this.form.target='_blank'" ajax="false" />
+                <div align="center">
+                    <p:outputLabel value="Cadastrar" style="font-size: x-large"/>
+                    <br></br><br></br>                
+                </div>
+                <p:panelGrid   columns="2" layout="grid"
+                               columnClasses="ui-grid-col-6,ui-grid-col-6"
+                               styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">
+                    <p:commandButton  value="Cliente" action="/cadastro/cliente.xhtml" onclick="this.form.target = '_blank'" ajax="false" />
+                    <p:commandButton value="Empresa" action="/cadastro/empresa.xhtml" onclick="this.form.target = '_blank'" ajax="false" />
+                </p:panelGrid> 
             </div>
-            
+
 
         </h:form>
     </body>

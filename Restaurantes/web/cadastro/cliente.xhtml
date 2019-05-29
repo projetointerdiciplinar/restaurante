@@ -38,19 +38,19 @@
                                         <br/><br/>
                                         <p:outputLabel value="CPF: "/>
                                         <br/><br/>
-                                        <p:inputText  />
+                                        <p:inputText value="#{pessoaMB.cpf}" />
                                         <br/><br/>
                                         <p:outputLabel value="Telefone: "/>
                                         <br/><br/>
-                                        <p:inputText  />
+                                        <p:inputText value="#{pessoaMB.telefone}" />
                                         <br/><br/>
                                         <p:outputLabel value="Celular: "/>
                                         <br/><br/>
-                                        <p:inputText  />
+                                        <p:inputText value="#{pessoaMB.celular}" />
                                         <br/><br/>
                                         <p:outputLabel value="Data de Nascimento:" />
                                         <br/><br/>
-                                        <p:calendar locale="br"  pattern="dd/MM/yyyy"/>
+                                        <p:calendar  locale="br" value="#{pessoaMB.data}" pattern="dd/MM/yyyy"/>
                                         <br/><br/>
 
                                         <p:outputLabel for="tipo" value="Sexo:" /><br/><br/>
@@ -83,13 +83,13 @@
                                                  style="border: transparent !important">
 
                                         <p:outputLabel value="E-mail: "/><br/><br/>
-                                        <p:inputText id="idEmail"  /><br/><br/>
+                                        <p:inputText value="#{pessoaMB.email}" id="idEmail"  /><br/><br/>
 
                                         <p:outputLabel value="Confirmar E-mail: "/><br/><br/>
                                         <p:inputText id="idEmailConf" /><br/><br/>
 
                                         <p:outputLabel value="Senha: "/><br/><br/>
-                                        <p:inputText id="idSenha"  /><br/><br/>
+                                        <p:inputText value="#{pessoaMB.senha}" id="idSenha"  /><br/><br/>
 
                                         <p:outputLabel value="Confirmar Senha: "/><br/><br/>
                                         <p:inputText id="idSenhaConf"   /><br/><br/>
