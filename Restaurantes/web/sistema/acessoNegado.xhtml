@@ -11,11 +11,10 @@
 
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'></link>
         <meta charset="UTF-8"></meta>
-        <title>Portal TI - Gestão Interna</title>
-        <link rel="icon" type="image/x-icon" href="#{resource['usinati:images/favicon.png']}"/>
+        <title>Acesso Negado</title>
         <style>
             body {
-                background: url("#{resource['usinati:images/background.jpg']}") no-repeat fixed center center;
+                background: url("#{resource['usinati:images/acessonegado.jpg']}") no-repeat fixed center center;
                 background-size: cover;
                 font-family: Montserrat;
                 opacity: 0.85;
@@ -106,25 +105,19 @@
         </style>
     </h:head>
     <body>
-        <f:metadata>
-            <f:event listener="#{loginMB.preRender}" type="preRenderView"/>
-        </f:metadata>
         <h:form prependId="false">
             <div class="logo"></div>
             <div class="login-block">
                 <div align="center">
-                    <p:outputLabel value="Login" style="font-size: x-large"/>
-                    <br></br><br></br>                
-                </div>
-                <p:inputText placeholder="Usuário" id="j_username" />
-                <p:password placeholder="Senha" id="j_password" />
-                <p:messages id="messages" showDetail="true" autoUpdate="true" /> 
-                <p:commandButton value="Entrar" actionListener="#{loginMB.login}" ajax="false"/>
-                <br /><br />
-                <p:commandButton value="Cadastrar" action="/cadastro/cliente.xhtml" onclick="this.form.target='_blank'" ajax="false" />
+                    <p:outputLabel value="Acesso Negado!!!" style="font-size: x-large; color: #1e94d2"/>            
+                    <br></br><br></br> <br></br><br></br>        
+                </div>               
+                <h:outputText
+                    value="Você não tem permissão de acesso a essa página. Favor voltar para página inicial!!" />
+                <br></br><br></br> <br></br><br></br> 
+                
+                <p:commandButton value="Dashboard" action="dashboard"/>
             </div>
-            
-
         </h:form>
     </body>
 </html>

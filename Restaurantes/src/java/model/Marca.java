@@ -24,7 +24,7 @@ public class Marca implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_marca", unique = true, nullable = false)
-    private int idMarca;
+    private Integer idMarca;
     @Column(name = "descricao", length = 20, nullable = false)
     private String descricao;
 

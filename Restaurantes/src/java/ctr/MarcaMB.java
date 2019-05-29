@@ -25,13 +25,14 @@ import util.FacesUtil;
 public class MarcaMB implements Serializable {
     
     private Marca marca;
-    private Dao dao = new Dao();
+    private Dao dao;
     List<Marca> listarMarca= new ArrayList<Marca>();
 
     public MarcaMB() {
+        dao = (Dao) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("dao");
         marca = new  Marca();
         listarMarca= new ArrayList<Marca>();
-        listarMarca = (List<Marca>) dao.buscarTodos(Marca.class);
+      //  listarMarca = (List<Marca>) dao.buscarTodos(Marca.class);
     }
     
     public void gravar (ActionEvent evt)

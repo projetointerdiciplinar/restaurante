@@ -3,6 +3,8 @@
   <persistence-unit name="testePU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>model.Marca</class>
+    <class>model.Usuario</class>
+    <class>model.Pessoa</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <validation-mode>NONE</validation-mode>
     <properties>

@@ -1,83 +1,86 @@
-
 package model;
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
 
-
 @Entity
-@Table (name = "pessoa")
+@Table(name = "pessoa")
 public class Pessoa implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_pessoa", unique = true, nullable = false)
-    private int idMarca;
-    @Column(name = "descricao", nullable = false)
-    private String descricao;
-    
+    private int idPessoa;
     @Column(name = "nome", nullable = false)
-     private String nome;
+    private String nome;
     @Column(name = "cpf", nullable = false)
-     private String cpf;
-    @Column(name = "rg", nullable = false)
-     private String rg;
-    @Column(name = "endereco", nullable = false)
-     private String endereco;
-    @Column(name = "numero", nullable = false)
-     private String numero;
-    @Column(name = "bairro", nullable = false)
-     private String bairro;
-    @Column(name = "cidade", nullable = false)
-     private String cidade;
-    @Column(name = "cep", nullable = false)
-     private String cep;
-    @Column(name = "estado", nullable = false)
-     private String estado;
+    private String cpf;
     @Column(name = "telefone", nullable = false)
-     private String telefone;
+    private String telefone;
     @Column(name = "celular", nullable = false)
-     private String celular;
-    @Column(name = "senha", nullable = false)
-     private String senha;
-    @Column(name = "email", nullable = false)
-     private String email;
-    @Column(name = "produtoPorEmail", nullable = false)
-     private String produtoPorEmail;
-    @Column(name = "tipo", nullable = false)
-     private String tipo;
-     
-     
-     @Transient
-     private String confirmaSenha;
-
-     
-     @Column(name = "data_nasc", nullable = false)
+    private String celular;
+    @Column(name = "data_nasc", nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataNascimento;
+    @Column(name = "sexo", nullable = false)
+    private String sexo;
+    @Column(name = "senha", nullable = false)
+    private String senha;
+    @Column(name = "email", nullable = false)
+    private String email;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario", nullable = false, foreignKey = @ForeignKey(name = "id_pessoa_usuario"))
+    private Usuario usuario;
+    
+    
+    
+    @Column(name = "rg", nullable = false)
+    private String rg;
+    @Column(name = "endereco", nullable = false)
+    private String endereco;
+    @Column(name = "numero", nullable = false)
+    private String numero;
+    @Column(name = "bairro", nullable = false)
+    private String bairro;
+    @Column(name = "cidade", nullable = false)
+    private String cidade;
+    @Column(name = "cep", nullable = false)
+    private String cep;
+    @Column(name = "estado", nullable = false)
+    private String estado;
+    
+    
+    @Column(name = "produtoPorEmail", nullable = false)
+    private String produtoPorEmail;
+    @Column(name = "tipo", nullable = false)
+    private String tipo;
 
-    public int getIdMarca() {
-        return idMarca;
+    @Transient
+    private String confirmaSenha;
+    private String confirmaEmail;
+
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setIdMarca(int idMarca) {
-        this.idMarca = idMarca;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
+    
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+    
 
     public String getNome() {
         return nome;
@@ -215,5 +218,30 @@ public class Pessoa implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
-   
+    public int getIdPessoa() {
+        return idPessoa;
+    }
+
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
+    }
+
+    public String getConfirmaEmail() {
+        return confirmaEmail;
+    }
+
+    public void setConfirmaEmail(String confirmaEmail) {
+        this.confirmaEmail = confirmaEmail;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    
+    
 }
