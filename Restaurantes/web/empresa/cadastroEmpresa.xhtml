@@ -1,0 +1,149 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/Layout.xhtml">
+
+    <ui:define name="title">Cadastro de Clientes</ui:define>
+
+    <ui:define name="head">
+        <style type="text/css">
+            .ui-panelgrid.form-elements .ui-grc-2 {
+                padding-left: 80px;
+            }
+
+            @media (max-width:1024px) {
+                .ui-panelgrid.form-elements .ui-grc-2 {
+                    padding-left: 20px;
+                }
+            }
+
+            @media (max-width:640px) {
+                .ui-panelgrid.form-elements .ui-grc-2 {
+                    padding-left: 6px;
+                }
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="ui-fluid">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <h:form id="formCliente">
+                        <p:growl id="menssagem" showDetail="true" sticky="false" />
+                        <div class="card card-w-title">
+                            <h1>Cadastro de Cliente</h1>
+                            <p:panelGrid columns="6" layout="grid"
+                                         columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-1,ui-g-12 ui-md-1,ui-g-12 ui-md-4,ui-g-12 ui-md-1,ui-g-12 ui-md-4"                                  
+                                         styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">                              
+                                <p:outputLabel value="Código:" for="idCod"/>
+                                <p:inputText id="idCod" value="#{empresaMB.empresa.idEmpresa}" disabled="true"/>
+                                <p:outputLabel value="Razão Social: " for="idNome" indicateRequired="false"/>
+                                <p:inputText id="idNome" value="#{empresaMB.empresa.razaoSocial}" required="true" requiredMessage="Razão Social obrigatório!"/>
+                                <p:outputLabel value="Nome Restaurante: " for="idFantasia" indicateRequired="false"/>
+                                <p:inputText id="idFantasia" value = "#{empresaMB.empresa.nomeRestaurante}" required="true" requiredMessage="Nome do Restaurante obrigatório!"/>                        
+                            </p:panelGrid> 
+
+                            <p:panelGrid columns="6" id="pnlPessoa" layout="grid"
+                                         columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-3,ui-g-12 ui-md-1,ui-g-12 ui-md-2,ui-g-12 ui-md-1,ui-g-12 ui-md-4"  
+                                         styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">                         
+                                <p:outputLabel id="idCnpj" value="CNPJ:" /> 
+                                <p:inputMask mask="99.999.999/9999-99" id="msCnpj" 
+                                             value="#{empresaMB.cnpj}" />
+                            </p:panelGrid>
+
+                            <p:panelGrid columns="6" layout="grid"  
+                                         columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-3,ui-g-12 ui-md-1,ui-g-12 ui-md-2,ui-g-12 ui-md-1,ui-g-12 ui-md-4"
+                                         styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">
+                                <p:outputLabel for="idEnd" value="Endereço:"/>
+                                <p:inputText id="idEnd" value="#{empresaMB.empresa.endereco}" />
+                                <p:outputLabel for="idNumero" value="Número:"/>
+                                <p:inputText id="idNumero" value="#{empresaMB.empresa.numero}" />
+                                <p:outputLabel for="idBairro" value="Bairro:"/>
+                                <p:inputText id="idBairro" value="#{empresaMB.empresa.bairro}" />
+                                <p:outputLabel for="idCidade" value="Cidade:"/>
+                                <p:inputText id="idCidade" value="#{empresaMB.empresa.cidade}" />
+                                <p:outputLabel for="idCep" value="CEP:"/>
+                                <p:inputMask id="idCep" value="#{empresaMB.empresa.cep}" mask="99999-999"></p:inputMask>
+
+                                <p:outputLabel for="idConsole" value="Estado:" />
+                                <p:selectOneMenu id="idConsole" value="#{empresaMB.empresa.estado}">
+                                    <f:selectItem itemLabel="Selecionar" itemValue="1" />
+                                    <f:selectItem itemLabel="AC" itemValue="AC" />
+                                    <f:selectItem itemLabel="AL" itemValue="AL" />
+                                    <f:selectItem itemLabel="AP" itemValue="AP" />
+                                    <f:selectItem itemLabel="AM" itemValue="AM" />
+                                    <f:selectItem itemLabel="BA" itemValue="BA" />
+                                    <f:selectItem itemLabel="CE" itemValue="CE" />
+                                    <f:selectItem itemLabel="DF" itemValue="DF" />
+                                    <f:selectItem itemLabel="ES" itemValue="ES" />
+                                    <f:selectItem itemLabel="GO" itemValue="GO" />
+                                    <f:selectItem itemLabel="MA" itemValue="MA" />
+                                    <f:selectItem itemLabel="MT" itemValue="MT" />
+                                    <f:selectItem itemLabel="MS" itemValue="MS" />
+                                    <f:selectItem itemLabel="MG" itemValue="MG" />
+                                    <f:selectItem itemLabel="PA" itemValue="PA" />
+                                    <f:selectItem itemLabel="PB" itemValue="PB" />
+                                    <f:selectItem itemLabel="PR" itemValue="PR" />
+                                    <f:selectItem itemLabel="PE" itemValue="PE" />
+                                    <f:selectItem itemLabel="PI" itemValue="PI" />
+                                    <f:selectItem itemLabel="RJ" itemValue="RJ" />
+                                    <f:selectItem itemLabel="RN" itemValue="RN" />
+                                    <f:selectItem itemLabel="RS" itemValue="RS" />
+                                    <f:selectItem itemLabel="RO" itemValue="RO" />
+                                    <f:selectItem itemLabel="RR" itemValue="RR" />
+                                    <f:selectItem itemLabel="SC" itemValue="SC" />
+                                    <f:selectItem itemLabel="SP" itemValue="SP" />
+                                    <f:selectItem itemLabel="SE" itemValue="SE" />
+                                    <f:selectItem itemLabel="TO" itemValue="TO" />
+                                </p:selectOneMenu>                                
+                                <p:outputLabel for="idTel" value="Telefone:"/>
+                                <p:inputMask id="idTel" value = "#{empresaMB.empresa.telefone}" mask="(99)9999-9999"></p:inputMask>
+                            </p:panelGrid>
+                            <br/>
+                            <p:panelGrid columns="4" layout="grid"
+                                         columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-6"
+                                         styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">
+                                <p:commandButton value="Salvar" actionListener="#{empresaMB.gravar}" update="formCliente,formCliente2"
+                                                 icon="fa fa-check"/>
+                                <p:commandButton  onclick="history.go(0); return false;" value="Cancelar"
+                                                  icon="fa fa-close"/>                                  
+                                <p:commandButton value="Excluir" actionListener="#{empresaMB.excluir}"
+                                                 icon="fa fa-trash" update="formCliente, menssagem" process="@this">
+                                    <p:confirm header="Confirmação" message="Você tem certeza ?" icon="ui-icon-alert" />
+                                </p:commandButton>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check " />
+                                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-close " />
+                                </p:confirmDialog>
+                            </p:panelGrid>
+                        </div>
+                    </h:form>
+                    <h:form id="formCliente2">
+                        <div class="card card-w-title">
+                            <p:dataTable id="tabela" value="#{empresaMB.listaEmpresa}" var="empresa" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="10,20,30,50" emptyMessage="Nenhuma informação..." reflow="true"  >
+                                <p:column headerText="Nome" width="40" sortBy="#{empresa.nomeRestaurante}">
+                                    <h:outputText value="#{empresa.nomeRestaurante}"/>
+                                </p:column>
+                                <p:column headerText="Cidade" width="20" sortBy="#{empresa.cidade}">
+                                    <h:outputText value="#{empresa.cidade}"/>
+                                </p:column>                    
+                                <p:column headerText="Telefone" width="4">
+                                    <h:outputText value="#{empresa.telefone}"/>
+                                </p:column>
+                                <p:column style="text-align: center; width:1%"> 
+                                    <p:commandLink title="Editar" id="alterar" actionListener="#{empresaMB.alterarCliente()}" update="formCliente,formCliente2" process="@this" >
+                                        <i class="fa fa-pencil-square-o"></i>
+                                    </p:commandLink>
+                                </p:column>
+                            </p:dataTable>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>       
+    </ui:define>
+</ui:composition>

@@ -3,11 +3,16 @@
 package model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -17,137 +22,53 @@ public class Empresa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_empresa", unique = true, nullable = false)
-    private int idMarca;
-    @Column(name = "descricao", nullable = false)
-    private String descricao;
-    
-    @Column(name = "nome", nullable = false)
-     private String nome;
-    @Column(name = "sobrenome", nullable = false)
-     private String sobrenome;
-    @Column(name = "email", nullable = false)
-     private String email;
-    @Column(name = "cpf", nullable = false)
-     private String cpf;
-    @Column(name = "cnpj", nullable = false)
-     private String cnpj;
-    @Column(name = "celular", nullable = false)
-     private String celular;
-    @Column(name = "rg", nullable = false)
-     private String rg;
-    @Column(name = "orgaoemissor", nullable = false)
-     private String orgaoemissor;
-    @Column(name = "razaosocial", nullable = false)
-     private String razaosocial;
-    @Column(name = "nomedorestaurante", nullable = false)
-     private String nomedorestaurante;
+    private Integer idEmpresa;
+    @Column(name = "razao_social", nullable = false)
+    private String razaoSocial;
+    @Column(name = "nome_restaurante", nullable = false)
+    private String nomeRestaurante;
     @Column(name = "telefone", nullable = false)
-     private String telefone;
-    @Column(name = "cep", nullable = false)
-     private String cep;
-    @Column(name = "estado", nullable = false)
-     private String estado;
-    @Column(name = "cidade", nullable = false)
-     private String cidade;
+    private String telefone;
     @Column(name = "endereco", nullable = false)
-     private String endereco;
+    private String endereco;
     @Column(name = "numero", nullable = false)
-     private int numero;
+    private Integer numero;
+    @Column(name = "bairro", nullable = false)
+    private String bairro;
+    @Column(name = "cep", nullable = false)
+    private String cep;
+    @Column(name = "cidade", nullable = false)
+    private String cidade;
+    @Column(name = "estado", nullable = false)
+    private String estado;
+    @Column(name = "especialidade", nullable = true)
+    private String especialidade;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario", nullable = false, foreignKey = @ForeignKey(name = "id_empresa_usuario"))
+    private Usuario usuario;
 
-    public int getIdMarca() {
-        return idMarca;
+    public Integer getIdEmpresa() {
+        return idEmpresa;
     }
 
-    public void setIdMarca(int idMarca) {
-        this.idMarca = idMarca;
+    public void setIdEmpresa(Integer idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getRazaoSocial() {
+        return razaoSocial;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeRestaurante() {
+        return nomeRestaurante;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
-
-    public String getRg() {
-        return rg;
-    }
-
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
-
-    public String getOrgaoemissor() {
-        return orgaoemissor;
-    }
-
-    public void setOrgaoemissor(String orgaoemissor) {
-        this.orgaoemissor = orgaoemissor;
-    }
-
-    public String getRazaosocial() {
-        return razaosocial;
-    }
-
-    public void setRazaosocial(String razaosocial) {
-        this.razaosocial = razaosocial;
-    }
-
-    public String getNomedorestaurante() {
-        return nomedorestaurante;
-    }
-
-    public void setNomedorestaurante(String nomedorestaurante) {
-        this.nomedorestaurante = nomedorestaurante;
+    public void setNomeRestaurante(String nomeRestaurante) {
+        this.nomeRestaurante = nomeRestaurante;
     }
 
     public String getTelefone() {
@@ -156,6 +77,30 @@ public class Empresa implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 
     public String getCep() {
@@ -174,6 +119,22 @@ public class Empresa implements Serializable {
         this.estado = estado;
     }
 
+    public String getEspecialidade() {
+        return especialidade;
+    }
+
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     public String getCidade() {
         return cidade;
     }
@@ -182,21 +143,5 @@ public class Empresa implements Serializable {
         this.cidade = cidade;
     }
 
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-   
-
+    
 }

@@ -13,7 +13,7 @@ public class Dao implements Serializable {
 
     private EntityManagerFactory emf;
     private EntityManager em;
-    //private String 
+    private String user;
 
     public Dao() {
         emf = Persistence.createEntityManagerFactory("testePU");
@@ -64,7 +64,7 @@ public class Dao implements Serializable {
             user = (Usuario) em.createNativeQuery("Select * from usuario where usuario = '" + usuario + "'", Usuario.class).getSingleResult();
             System.out.println("===============" + user.getNome());
             System.out.println("===============" + user.getPerfil());
-            usuarioLogado(user.getNome());
+            setUser(user.getNome());
         } catch (Exception e) {
         }
 
@@ -75,5 +75,17 @@ public class Dao implements Serializable {
     public Usuario usuarioLogado(String nome) {
         return (Usuario) em.createNativeQuery("Select * from USUARIO where usuario = '" + nome + "'", Usuario.class).getSingleResult();
     }
+    public List<Usuario> usuarioLogado2() {
+        return (List<Usuario>) em.createNativeQuery("SELECT * FROM USUARIO  where usuario = '" + getUser() + "'", Usuario.class).getResultList();
+    }
 
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    
 }
