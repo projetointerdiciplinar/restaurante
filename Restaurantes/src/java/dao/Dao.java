@@ -62,9 +62,9 @@ public class Dao implements Serializable {
         Usuario user = null;
         try {
             user = (Usuario) em.createNativeQuery("Select * from usuario where usuario = '" + usuario + "'", Usuario.class).getSingleResult();
-            System.out.println("===============" + user.getNome());
+            System.out.println("===============" + user.getUsuario());
             System.out.println("===============" + user.getPerfil());
-            setUser(user.getNome());
+            setUser(user.getUsuario());
         } catch (Exception e) {
         }
 

@@ -42,8 +42,7 @@ public class PessoaMB implements Serializable {
     private Date data;
 
     public void PessoaMB() {
-        dao = new Dao();
-        //dao = (Dao) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("dao");
+        dao = (Dao) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("dao");
         novo();
     }
 
@@ -56,22 +55,18 @@ public class PessoaMB implements Serializable {
 
     public void gravar(ActionEvent evt) {
         try {
-            System.out.println("======" + getNome());
-            usuario.setNome(getEmail());
-            usuario.setSenha(getSenha());
-            pessoa.setNome(getNome());
-            pessoa.setTelefone(getTelefone());
-            pessoa.setCpf(getCpf());
-//            pessoa.setNome(getNome());
-//            //usuario.setNome(pessoa.getCpf());
-//            //usuario.setSenha(pessoa.getSenha());
-//            //usuario.setPerfil("CLIENTE");
-//            dao.gravar(usuario);
-//            //pessoa.setUsuario(new Usuario());
-//            dao.gravar(pessoa);
-//            /*listarMarcaVeiculo = (List<Marca>) dao.buscarTodos(Marca.class);*/
-//            pessoa = new Pessoa();
-            FacesUtil.addInfoMessage("Informação", "Cadastro realizado com sucesso!");
+            if (pessoa.getSenha() == null ? getConfirmaSenha() != null : !getSenha().equals(getConfirmaSenha())) {
+                FacesUtil.addWarnMessage("Aviso", "Senhas não confere");
+            } else {
+                usuario.setUsuario(pessoa.getCpf());
+                usuario.setSenha(pessoa.getSenha());
+                usuario.setPerfil("EMPRESA");
+                dao.gravar(usuario);
+                dao.gravar(pessoa);
+
+                FacesUtil.addInfoMessage("Informação", "Cadastro realizado com sucesso!");
+            }
+
         } catch (Exception ex) {
             FacesUtil.addErrorMessage("Erro", "Entre em contato com suporte!");
             ex.printStackTrace();

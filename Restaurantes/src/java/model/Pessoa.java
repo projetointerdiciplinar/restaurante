@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 @Table(name = "pessoa")
@@ -26,8 +28,12 @@ public class Pessoa implements Serializable {
     private int idPessoa;
     @Column(name = "nome", nullable = false)
     private String nome;
-    @Column(name = "cpf", nullable = true)
+    @CPF
+    @Column(name = "cpf", nullable = true, length = 15)
     private String cpf;
+    @CNPJ
+    @Column(name = "cnpj", nullable = true, length = 19)
+    private String cnpj;
     @Column(name = "telefone", nullable = true)
     private String telefone;
     @Column(name = "celular", nullable = true)
@@ -45,7 +51,8 @@ public class Pessoa implements Serializable {
     @JoinColumn(name = "id_usuario", nullable = false, foreignKey = @ForeignKey(name = "id_pessoa_usuario"))
     private Usuario usuario;
     
-    
+    @Transient
+    private String confirmaSenha;
     
     @Column(name = "rg", nullable = true)
     private String rg;
@@ -211,6 +218,22 @@ public class Pessoa implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public String getConfirmaSenha() {
+        return confirmaSenha;
+    }
+
+    public void setConfirmaSenha(String confirmaSenha) {
+        this.confirmaSenha = confirmaSenha;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     

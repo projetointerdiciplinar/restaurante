@@ -43,8 +43,8 @@ public class EmpresaMB implements Serializable{
         listaEmpresa = new ArrayList<Empresa>();
         listaUsuario = new ArrayList<Usuario>();
         listaUsuario = (List<Usuario>) dao.usuarioLogado2();
-        System.out.println("===========" + listaUsuario.get(0).getNome());
-        setUser(listaUsuario.get(0).getNome());
+        System.out.println("===========" + listaUsuario.get(0).getUsuario());
+        setUser(listaUsuario.get(0).getUsuario());
     }
     
     public void gravar (ActionEvent evt)

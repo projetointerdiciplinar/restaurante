@@ -1,0 +1,134 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/Layout.xhtml">
+
+    <ui:define name="title-tab">Identificação</ui:define>
+    <ui:define name="content">
+        <style>
+            .ui-growl{
+                position:fixed;
+                top:100px;
+                right:20px;
+                width:301px;
+            }
+        </style>  
+
+        <span class="gray">          
+
+            <h:form id="formIdentificacao">
+                <p:messages id="menssagem" showDetail="true" closable="true"/>    
+                <p:panel id="basic" styleClass="ui-panelgrid-blank form-group" style="margin-bottom:10px; border:0px none; background-color:transparent;">   
+                    <div class="ui-fluid">
+                        <br/>
+                        <h2 class="CardBigTopic">Identificação</h2>
+                        <p:panelGrid id="idPanelIdentificacao" columns="2" layout="grid"
+                                     columnClasses="ui-grid-col-6,ui-grid-col-6"
+                                     styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">
+
+                            <p:panel id="basic_valores_venda" header="Dados Pessoais" style="margin-bottom:10px" >
+                                <div class="ui-fluid">
+                                    <p:panelGrid columns="2" layout="grid"                                       
+                                                 styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;"> 
+                                        <p:outputLabel value="Nome Completo: "/>
+                                        <br/><br/>
+                                        <p:inputText value="#{pessoaMB.nome}"/>
+                                        <br/><br/>
+                                        <p:outputLabel value="CPF: "/>
+                                        <br/><br/>
+                                        <p:inputText value="#{pessoaMB.cpf}" />
+                                        <br/><br/>
+                                        <p:outputLabel value="Telefone: "/>
+                                        <br/><br/>
+                                        <p:inputText value="#{pessoaMB.telefone}" />
+                                        <br/><br/>
+                                        <p:outputLabel value="Celular: "/>
+                                        <br/><br/>
+                                        <p:inputText value="#{pessoaMB.celular}" />
+                                        <br/><br/>
+                                        <p:outputLabel value="Data de Nascimento:" />
+                                        <br/><br/>
+                                        <p:calendar  locale="br" value="#{pessoaMB.data}" pattern="dd/MM/yyyy"/>
+                                        <br/><br/>
+
+                                        <p:outputLabel for="tipo" value="Sexo:" /><br/><br/>
+                                        <p:selectOneRadio id="tipo" layout="responsive" columns="2" >
+                                            <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+                                            <f:selectItem itemLabel="Feminino" itemValue="Feminino" />  
+                                            <p:ajax event="change" />
+                                        </p:selectOneRadio>  
+
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/> 
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/> 
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/> 
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/>
+                                    </p:panelGrid>
+                                </div>
+
+                            </p:panel>
+                            <p:panel id="basic_pagamento" header="Dados de acesso" style="margin-bottom:10px">
+
+                                <div class="ui-fluid">
+                                    <p:panelGrid columns="2" layout="grid"                                     
+                                                 style="border: transparent !important">
+
+                                        <p:outputLabel value="E-mail: "/><br/><br/>
+                                        <p:inputText value="#{pessoaMB.email}" id="idEmail"  /><br/><br/>
+
+                                        <p:outputLabel value="Confirmar E-mail: "/><br/><br/>
+                                        <p:inputText id="idEmailConf" /><br/><br/>
+
+                                        <p:outputLabel value="Senha: "/><br/><br/>
+                                        <p:inputText value="#{pessoaMB.senha}" id="idSenha"  /><br/><br/>
+
+                                        <p:outputLabel value="Confirmar Senha: "/><br/><br/>
+                                        <p:inputText id="idSenhaConf"   /><br/><br/>
+
+
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/> 
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/> 
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/>
+                                        <p:outputLabel value=""/> 
+                                        <br/><br/>
+                                        <p:outputLabel />
+                                        <p:commandButton value="Salvar" update="formIdentificacao" actionListener="#{pessoaMB.gravar}"  
+                                             icon="fa fa-check"/>
+                                        <br/><br/>
+                                        <br/><br/>
+
+                                    </p:panelGrid>
+                                </div>
+                            </p:panel>
+                        </p:panelGrid>
+
+                    </div>
+                </p:panel> 
+            </h:form>
+
+
+
+        </span>
+
+    </ui:define>
+</ui:composition>
