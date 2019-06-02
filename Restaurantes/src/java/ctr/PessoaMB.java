@@ -41,7 +41,7 @@ public class PessoaMB implements Serializable {
     private String cpf;
     private Date data;
 
-    public void PessoaMB() {
+    public PessoaMB() {
         dao = (Dao) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("dao");
         novo();
     }
@@ -53,17 +53,19 @@ public class PessoaMB implements Serializable {
         pessoa.setUsuario(new Usuario());
     }
 
-    public void gravar(ActionEvent evt) {
+    public void gravarDoEmpresa(ActionEvent evt) {
         try {
-            if (pessoa.getSenha() == null ? getConfirmaSenha() != null : !getSenha().equals(getConfirmaSenha())) {
+            System.out.println("============"+pessoa.getSenha());
+            if (pessoa.getSenha() == null ? getConfirmaSenha() != null : !pessoa.getSenha().equals(getConfirmaSenha())) {
                 FacesUtil.addWarnMessage("Aviso", "Senhas não confere");
             } else {
                 usuario.setUsuario(pessoa.getCpf());
                 usuario.setSenha(pessoa.getSenha());
                 usuario.setPerfil("EMPRESA");
+                pessoa.setUsuario(usuario);
                 dao.gravar(usuario);
                 dao.gravar(pessoa);
-
+                novo();
                 FacesUtil.addInfoMessage("Informação", "Cadastro realizado com sucesso!");
             }
 
