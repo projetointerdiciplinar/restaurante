@@ -28,7 +28,6 @@ public class Pessoa implements Serializable {
     private int idPessoa;
     @Column(name = "nome", nullable = false)
     private String nome;
-    @CPF
     @Column(name = "cpf", nullable = true, length = 15)
     private String cpf;
     @CNPJ

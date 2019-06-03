@@ -89,16 +89,16 @@
 
                                         <p:outputLabel value="CPF: "/>
                                         <br/><br/>
-                                        <p:inputMask mask="999.999.999-99" id="msCpf" value="#{pessoaMB.pessoa.cpf}" />
+                                        <p:inputMask mask="999.999.999-99" id="msCpf" value="#{pessoaMB.cpf}" />
                                         <br/><br/>
                                         <p:outputLabel value="Senha: "/>
                                         <br/><br/>
-                                        <p:password value="#{pessoaMB.pessoa.senha}" id="idSenha"  />
+                                        <p:password value="#{pessoaMB.pessoa.senha}"  />
                                         <br/><br/>
 
                                         <p:outputLabel value="Confirmar Senha: "/>
                                         <br/><br/>
-                                        <p:password value="#{pessoaMB.confirmaSenha}" id="idSenhaConf"   /><br/><br/>
+                                        <p:password value="#{pessoaMB.confirmaSenha}"    /><br/><br/>
 
 
                                         <p:outputLabel value=""/>
@@ -118,7 +118,7 @@
                                         <br/><br/>
                                         <p:outputLabel />
                                         <p:commandButton value="Salvar" update="formIdentificacao" actionListener="#{pessoaMB.gravarDoEmpresa}"  
-                                                         icon="fa fa-check"/>
+                                                         icon="fa fa-check" />
                                         <br/><br/>
                                         <br/><br/>
 

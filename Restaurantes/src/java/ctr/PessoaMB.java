@@ -37,7 +37,7 @@ public class PessoaMB implements Serializable {
 
     // variaveis
     private String nome, telefone, celular, email, confirmaEmail, senha, confirmaSenha, sexo;
-    //@CPF
+    @CPF
     private String cpf;
     private Date data;
 
@@ -59,6 +59,7 @@ public class PessoaMB implements Serializable {
             if (pessoa.getSenha() == null ? getConfirmaSenha() != null : !pessoa.getSenha().equals(getConfirmaSenha())) {
                 FacesUtil.addWarnMessage("Aviso", "Senhas não confere");
             } else {
+                pessoa.setCpf(getCpf());
                 usuario.setUsuario(pessoa.getCpf());
                 usuario.setSenha(pessoa.getSenha());
                 usuario.setPerfil("EMPRESA");
