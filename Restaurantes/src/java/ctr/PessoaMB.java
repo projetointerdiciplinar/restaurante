@@ -7,6 +7,7 @@ package ctr;
 
 import dao.Dao;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +35,8 @@ public class PessoaMB implements Serializable {
 
     // Lista
     private List<Pessoa> listaPessoa = new ArrayList<Pessoa>();
+    private List<Pessoa> listaCliente = new ArrayList<Pessoa>();
+
 
     // variaveis
     private String nome, telefone, celular, email, confirmaEmail, senha, confirmaSenha, sexo;
@@ -50,6 +53,8 @@ public class PessoaMB implements Serializable {
         pessoa = new Pessoa();
         usuario = new Usuario();
         listaPessoa = new ArrayList<Pessoa>();
+        listaCliente = new ArrayList<Pessoa>();
+        buscarCliente();
         pessoa.setUsuario(new Usuario());
     }
 
@@ -73,6 +78,18 @@ public class PessoaMB implements Serializable {
         } catch (Exception ex) {
             FacesUtil.addErrorMessage("Erro", "Entre em contato com suporte!");
             ex.printStackTrace();
+        }
+    }
+    public void buscarCliente() {
+        List<Object[]> results = dao.buscarCliente();
+        Pessoa pes;
+        for (Object[] result : results) {
+            pes = new Pessoa();
+            pes.setNome((String) result[0]);
+            pes.setCpf((String) result[1]);
+            pes.setEmail((String) result[2]);
+            pes.setTelefone((String) result[3]);
+            getListaCliente().add(pes);
         }
     }
 
@@ -188,4 +205,13 @@ public class PessoaMB implements Serializable {
         this.data = data;
     }
 
+    public List<Pessoa> getListaCliente() {
+        return listaCliente;
+    }
+
+    public void setListaCliente(List<Pessoa> listaCliente) {
+        this.listaCliente = listaCliente;
+    }
+
+    
 }

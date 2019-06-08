@@ -37,11 +37,13 @@
         <intercept-url pattern="/empresa/**" access="isAuthenticated()"/>
         <intercept-url pattern="/cliente/**" access="isAuthenticated()"/>
         <intercept-url pattern="/sistema/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/areaDoCliente/**" access="isAuthenticated()"/>
         <intercept-url pattern="/cadastro/**" access="isAnonymous()"/>
         <intercept-url pattern="/acessoNegado.xhtml" access="isAuthenticated()"/>           
         <intercept-url pattern="/sistema/**" access="hasAnyRole('ADMINISTRADOR')"/>
         <intercept-url pattern="/cliente/**" access="hasAnyRole('ADMINISTRADOR','CLIENTE')"/>
         <intercept-url pattern="/empresa/**" access="hasAnyRole('ADMINISTRADOR','EMPRESA')"/>
+        <intercept-url pattern="/areaDoCliente/**" access="hasAnyRole('ADMINISTRADOR','CLIENTE')"/>
         <intercept-url pattern="/**" access="denyAll"/>
         <form-login login-page="/login.xhtml" authentication-failure-url="/login.xhtml?invalid=true" default-target-url="/" always-use-default-target="true"/>
         <logout logout-url="/j_spring_security_logout" invalidate-session="true" />

@@ -101,6 +101,8 @@
                                 </p:selectOneMenu>                                
                                 <p:outputLabel for="idTel" value="Telefone:"/>
                                 <p:inputMask id="idTel" value = "#{empresaMB.empresa.telefone}" mask="(99)9999-9999"></p:inputMask>
+                                <p:outputLabel for="idTel" value="Imagem*"/>
+                                <p:fileUpload value="#{fileUploadView.file}" mode="simple" skinSimple="true"/>
                             </p:panelGrid>
                             <br/>
                             <p:panelGrid columns="4" layout="grid"

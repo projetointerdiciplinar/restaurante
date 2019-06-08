@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+import model.Pessoa;
 import model.Usuario;
 
 public class Dao implements Serializable {
@@ -75,16 +77,24 @@ public class Dao implements Serializable {
     public Usuario usuarioLogado(String nome) {
         return (Usuario) em.createNativeQuery("Select * from USUARIO where usuario = '" + nome + "'", Usuario.class).getSingleResult();
     }
+
     public List<Usuario> usuarioLogado2() {
         return (List<Usuario>) em.createNativeQuery("SELECT * FROM USUARIO  where usuario = '" + getUser() + "'", Usuario.class).getResultList();
     }
+    
 
     public String getUser() {
         return user;
     }
-
     public void setUser(String user) {
         this.user = user;
+    }
+
+    //----------------PESSOA----------------
+    public List<Object[]> buscarCliente() {
+        TypedQuery<Object[]> query = (TypedQuery<Object[]>) em.createNativeQuery("select a.nome, a.cpf,a.email, a.telefone from pessoa a, usuario b where a.id_usuario = b.id_usuario and b.perfil = 'CLIENTE'");
+        List<Object[]> results = query.getResultList();
+        return results;
     }
 
     

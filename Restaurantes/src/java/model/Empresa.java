@@ -1,5 +1,3 @@
-
-
 package model;
 
 import java.io.Serializable;
@@ -16,10 +14,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.validator.constraints.br.CNPJ;
 
-
 @Entity
-@Table (name = "empresa")
+@Table(name = "empresa")
 public class Empresa implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_empresa", unique = true, nullable = false)
@@ -47,9 +45,12 @@ public class Empresa implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", nullable = false, foreignKey = @ForeignKey(name = "id_empresa_usuario"))
     private Usuario usuario;
-@CNPJ
+    @CNPJ
     @Column(name = "cnpj", nullable = true, length = 19)
     private String cnpj;
+    @Column(name = "imagem", nullable = false)
+    private String imagem;
+    
     public Integer getIdEmpresa() {
         return idEmpresa;
     }
@@ -154,5 +155,12 @@ public class Empresa implements Serializable {
         this.cnpj = cnpj;
     }
 
-    
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+
 }
