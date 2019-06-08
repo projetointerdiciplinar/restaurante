@@ -30,34 +30,45 @@
 
                             <p:panel id="basic_valores_venda" header="Dados Pessoais" style="margin-bottom:10px" >
                                 <div class="ui-fluid">
-                                    <p:panelGrid columns="2" layout="grid"                                       
+                                    <p:panelGrid columns="2" layout="grid" 
+                                                 columnClasses="ui-grid-col-12,ui-grid-col-6"
                                                  styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;"> 
                                         <p:outputLabel value="Nome Completo: "/>
                                         <br/><br/>
-                                        <p:inputText value="#{pessoaMB.nome}"/>
+                                        <p:inputText value="#{clienteMB.nome}"/>
                                         <br/><br/>
-                                        <p:outputLabel value="CPF: "/>
+                                        <p:outputLabel value="E-mail: "/>
                                         <br/><br/>
-                                        <p:inputText value="#{pessoaMB.cpf}" />
+                                        <p:inputText id="email" required="true" label="email" size="40"
+                                                     requiredMessage="Entre com seu email."
+                                                     validatorMessage="Email ivalido"
+                                                     value="#{clienteMB.email}">
+
+                                            <f:validateRegex
+                                                pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+                                        </p:inputText>
+                                        <p:watermark for="email" value="Email" />
+                                        <p:outputLabel/>
                                         <br/><br/>
                                         <p:outputLabel value="Telefone: "/>
                                         <br/><br/>
-                                        <p:inputText value="#{pessoaMB.telefone}" />
+                                        <p:inputMask value = "#{clienteMB.telefone}" mask="(99)9999-9999"></p:inputMask>
                                         <br/><br/>
                                         <p:outputLabel value="Celular: "/>
                                         <br/><br/>
-                                        <p:inputText value="#{pessoaMB.celular}" />
+                                        <p:inputMask value = "#{clienteMB.celular}" mask="(99)99999-9999"></p:inputMask>
                                         <br/><br/>
                                         <p:outputLabel value="Data de Nascimento:" />
                                         <br/><br/>
-                                        <p:calendar  locale="br" value="#{pessoaMB.data}" pattern="dd/MM/yyyy"/>
+                                        <p:calendar  locale="br" value="#{clienteMB.data}" pattern="dd/MM/yyyy"/>
                                         <br/><br/>
 
-                                        <p:outputLabel for="tipo" value="Sexo:" /><br/><br/>
-                                        <p:selectOneRadio id="tipo" layout="responsive" columns="2" >
-                                            <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
-                                            <f:selectItem itemLabel="Feminino" itemValue="Feminino" />  
-                                            <p:ajax event="change" />
+                                        <p:outputLabel for="tipo" value="Sexo:"  /><br/><br/>
+                                        <p:selectOneRadio id="tipo" layout="responsive" columns="2" value="#{clienteMB.sexo}" >
+                                            <f:selectItem itemLabel="Masculino" itemValue="#{true}" />
+                                            <f:selectItem itemLabel="Feminino" itemValue="#{false}" />  
+                                            <p:ajax event="change" process="tipo" />
                                         </p:selectOneRadio>  
 
                                         <p:outputLabel value=""/>
@@ -79,20 +90,22 @@
                             <p:panel id="basic_pagamento" header="Dados de acesso" style="margin-bottom:10px">
 
                                 <div class="ui-fluid">
-                                    <p:panelGrid columns="2" layout="grid"                                     
+                                    <p:panelGrid columns="2" layout="grid"  
+                                                 columnClasses="ui-grid-col-12,ui-grid-col-6"
                                                  style="border: transparent !important">
 
-                                        <p:outputLabel value="E-mail: "/><br/><br/>
-                                        <p:inputText value="#{pessoaMB.email}" id="idEmail"  /><br/><br/>
+                                        <p:outputLabel value="CPF: "/>
+                                        <br/><br/>
+                                        <p:inputMask mask="999.999.999-99" id="msCpf" value="#{clienteMB.cpf}" />
+                                        <br/><br/>
+                                        <p:outputLabel value="Senha: "/>
+                                        <br/><br/>
+                                        <p:password value="#{clienteMB.senha}" id="idSenha"  />
+                                        <br/><br/>
 
-                                        <p:outputLabel value="Confirmar E-mail: "/><br/><br/>
-                                        <p:inputText id="idEmailConf" /><br/><br/>
-
-                                        <p:outputLabel value="Senha: "/><br/><br/>
-                                        <p:inputText value="#{pessoaMB.senha}" id="idSenha"  /><br/><br/>
-
-                                        <p:outputLabel value="Confirmar Senha: "/><br/><br/>
-                                        <p:inputText id="idSenhaConf"   /><br/><br/>
+                                        <p:outputLabel value="Confirmar Senha: "/>
+                                        <br/><br/>
+                                        <p:password value="#{clienteMB.confirmaSenha}" id="idSenhaConf"   /><br/><br/>
 
 
                                         <p:outputLabel value=""/>
@@ -108,12 +121,11 @@
                                         <p:outputLabel value=""/> 
                                         <p:outputLabel value=""/>
                                         <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/> 
+
                                         <br/><br/>
                                         <p:outputLabel />
-                                        <p:commandButton value="Salvar" update="formIdentificacao" actionListener="#{pessoaMB.gravar}"  
-                                             icon="fa fa-check"/>
+                                        <p:commandButton value="Salvar" update="formIdentificacao" actionListener="#{clienteMB.gravarCliente}"  
+                                                         icon="fa fa-check"/>
                                         <br/><br/>
                                         <br/><br/>
 

@@ -32,6 +32,7 @@ public class EmpresaMB implements Serializable{
     private List<Usuario> listaUsuario = new ArrayList<Usuario>();
     
     private String cnpj, user;
+    private Integer idUser;
     
     public EmpresaMB(){
         dao = (Dao) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("dao");
@@ -43,17 +44,22 @@ public class EmpresaMB implements Serializable{
         listaEmpresa = new ArrayList<Empresa>();
         listaUsuario = new ArrayList<Usuario>();
         listaUsuario = (List<Usuario>) dao.usuarioLogado2();
+        listaEmpresa = (List<Empresa>) dao.buscarTodos(Empresa.class);
         System.out.println("===========" + listaUsuario.get(0).getUsuario());
         setUser(listaUsuario.get(0).getUsuario());
+        setIdUser(listaUsuario.get(0).getIdUsuario());
     }
     
     public void gravar (ActionEvent evt)
     {
         try {
+            usuario.setIdUsuario(getIdUser());
+            empresa.setUsuario(usuario);
             dao.gravar(empresa);
             /*listarMarcaVeiculo = (List<Marca>) dao.buscarTodos(Marca.class);*/
             empresa = new Empresa();
              FacesUtil.addInfoMessage("Informação", "Cadastro salvo com sucesso!");
+             novo();
         } catch (Exception ex) {
             FacesUtil.addErrorMessage("Erro", "Entre em contato com suporte!");
             ex.printStackTrace();
@@ -114,6 +120,14 @@ public class EmpresaMB implements Serializable{
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public Integer getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
     }
     
     

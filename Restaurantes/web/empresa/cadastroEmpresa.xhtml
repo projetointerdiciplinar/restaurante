@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/templates/Layout.xhtml">
 
-    <ui:define name="title">Cadastro de Clientes</ui:define>
+    <ui:define name="title">Cadastro da Empresa</ui:define>
 
     <ui:define name="head">
         <style type="text/css">
@@ -34,7 +34,7 @@
                     <h:form id="formCliente">
                         <p:growl id="menssagem" showDetail="true" sticky="false" />
                         <div class="card card-w-title">
-                            <h1>Cadastro de Cliente</h1>
+                            <h1>Cadastro da Empresa</h1>
                             <p:panelGrid columns="6" layout="grid"
                                          columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-1,ui-g-12 ui-md-1,ui-g-12 ui-md-4,ui-g-12 ui-md-1,ui-g-12 ui-md-4"                                  
                                          styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">                              
@@ -51,7 +51,7 @@
                                          styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">                         
                                 <p:outputLabel id="idCnpj" value="CNPJ:" /> 
                                 <p:inputMask mask="99.999.999/9999-99" id="msCnpj" 
-                                             value="#{empresaMB.cnpj}" />
+                                             value="#{empresaMB.empresa.cnpj}" />
                             </p:panelGrid>
 
                             <p:panelGrid columns="6" layout="grid"  
@@ -125,9 +125,12 @@
                         <div class="card card-w-title">
                             <p:dataTable id="tabela" value="#{empresaMB.listaEmpresa}" var="empresa" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                          rowsPerPageTemplate="10,20,30,50" emptyMessage="Nenhuma informação..." reflow="true"  >
-                                <p:column headerText="Nome" width="40" sortBy="#{empresa.nomeRestaurante}">
+                                <p:column headerText="Nome Restaurante" width="40" sortBy="#{empresa.nomeRestaurante}">
                                     <h:outputText value="#{empresa.nomeRestaurante}"/>
                                 </p:column>
+                                <p:column headerText="Cnpj" width="10" sortBy="#{empresa.cnpj}">
+                                    <h:outputText value="#{empresa.cnpj}"/>
+                                </p:column> 
                                 <p:column headerText="Cidade" width="20" sortBy="#{empresa.cidade}">
                                     <h:outputText value="#{empresa.cidade}"/>
                                 </p:column>                    

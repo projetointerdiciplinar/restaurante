@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.validator.constraints.br.CNPJ;
 
 
 @Entity
@@ -46,7 +47,9 @@ public class Empresa implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", nullable = false, foreignKey = @ForeignKey(name = "id_empresa_usuario"))
     private Usuario usuario;
-
+@CNPJ
+    @Column(name = "cnpj", nullable = true, length = 19)
+    private String cnpj;
     public Integer getIdEmpresa() {
         return idEmpresa;
     }
@@ -141,6 +144,14 @@ public class Empresa implements Serializable {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     
