@@ -55,6 +55,7 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
     }
 
     protected String determineTargetUrl(Authentication authentication) {
+        System.out.println("===========================determineTargetUrl");
         boolean isUser = false;
         boolean isAdmin = false;
         boolean isEmpresa = false;
@@ -74,7 +75,8 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
         }
 
         if (isUser) {
-            return "/index.xhtml";
+            System.out.println("=================cliente");
+            return "/areaDoCliente/index.xhtml";
         } else if (isAdmin) {
             return "/sistema/dashboard.xhtml";
         } else if (isEmpresa) {

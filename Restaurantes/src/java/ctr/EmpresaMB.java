@@ -15,6 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import model.Empresa;
 import model.Usuario;
+import org.primefaces.model.UploadedFile;
 import util.FacesUtil;
 
 /**
@@ -27,7 +28,7 @@ public class EmpresaMB implements Serializable{
     private Empresa empresa;
     private Usuario usuario;
     private Dao dao;
-    
+    private UploadedFile uploadedFile;
     private List<Empresa> listaEmpresa = new ArrayList<Empresa>();
     private List<Usuario> listaUsuario = new ArrayList<Usuario>();
     
@@ -128,6 +129,14 @@ public class EmpresaMB implements Serializable{
 
     public void setIdUser(Integer idUser) {
         this.idUser = idUser;
+    }
+
+    public UploadedFile getUploadedFile() {
+        return uploadedFile;
+    }
+
+    public void setUploadedFile(UploadedFile uploadedFile) {
+        this.uploadedFile = uploadedFile;
     }
     
     

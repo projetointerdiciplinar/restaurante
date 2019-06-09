@@ -68,6 +68,7 @@ public class ClienteMB implements Serializable {
                 dao.gravar(pessoa);
                 limparClienteUsuario();
 //            /*listarMarcaVeiculo = (List<Marca>) dao.buscarTodos(Marca.class);*/
+//FacesContext.getCurrentInstance().getExternalContext().redirect(("/sistema/dashboard.xhtml"));
                 novo();
                 FacesUtil.addInfoMessage("Informação", "Cadastro realizado com sucesso!");
             }
@@ -108,7 +109,8 @@ public class ClienteMB implements Serializable {
         }
 
     }
-    public void limparClienteUsuario(){
+
+    public void limparClienteUsuario() {
         setCpf("");
         setConfirmaSenha("");
         setSenha("");

@@ -1,131 +1,73 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"   
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
+
     <h:head>
-        <!--   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
-
-
-        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'></link>
-        <meta charset="UTF-8"></meta>
-        <title>Portal TI - Gestão Interna</title>
-        <link rel="icon" type="image/x-icon" href="#{resource['usinati:images/favicon.png']}"/>
-        <style>
-            body {
-                background: url("#{resource['usinati:images/background.jpg']}") no-repeat fixed center center;
-                background-size: cover;
-                font-family: Montserrat;
-                opacity: 0.85;
-            }
-
-            .logo {
-                width: 290px;
-                height: 70px;
-                /*background: url("#{resource['usinati:images/logo.png']}") no-repeat;*/
-                margin: 30px auto;
-            }
-
-            .login-block {
-                width: 320px;
-                padding: 20px;
-                background: #fff;
-                border-radius: 5px;
-                border-top: 5px solid #1e94d2;
-                margin: 0 auto;
-            }
-
-            .login-block h1 {
-                text-align: center;
-                color: #000;
-                font-size: 18px;
-                text-transform: uppercase;
-                margin-top: 0;
-                margin-bottom: 20px;
-            }
-
-            .login-block input {
-                width: 100%;
-                height: 42px;
-                box-sizing: border-box;
-                border-radius: 5px;
-                border: 1px solid #1e94d2;
-                margin-bottom: 20px;
-                font-size: 14px;
-                font-family: Montserrat;
-                padding: 0 20px 0 50px;
-                outline: none;
-            }
-
-            .login-block input#username {
-                background: #fff url("#{resource['usinati:images/username-login.jpg']}") 20px top no-repeat;
-                background-size: 16px 80px;
-            }
-
-            .login-block input#username:focus {
-                background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px bottom no-repeat;
-                background-size: 16px 80px;
-            }
-
-            .login-block input#password {
-                background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px top no-repeat;
-                background-size: 16px 80px;
-            }
-
-            .login-block input#password:focus {
-                background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px bottom no-repeat;
-                background-size: 16px 80px;
-            }
-
-            .login-block input:active, .login-block input:focus {
-                border: 1px solid #1e94d2;
-            }
-
-            .login-block button {
-                width: 100%;
-                height: 40px;
-                background: #1e94d2;
-                box-sizing: border-box;
-                border-radius: 5px;
-                border: 1px solid #1e94d2;
-                color: #fff;
-                font-weight: bold;
-                font-size: 14px;
-                font-family: Montserrat;
-                outline: none;
-                cursor: pointer;
-
-            }
-
-            .login-block button:hover {
-                background: #373737;
-            }
-
-        </style>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['paradise-layout:images/favicon.png']}"/>
+        <title>FJME Sistema - A maneira mais simples de gerenciar sua empresa</title>
     </h:head>
-    <body>
-        <f:metadata>
+
+    <h:body styleClass="login-body">
+         <f:metadata>
             <f:event listener="#{loginMB.preRender}" type="preRenderView"/>
         </f:metadata>
         <h:form prependId="false">
-            <div class="logo"></div>
-            <div class="login-block">
-                <div align="center">
-                    <p:outputLabel value="Login" style="font-size: x-large"/>
-                    <br></br><br></br>                
+            <div class="login-panel ui-fluid">
+                <div class="ui-g">
+                     <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                    <div class="ui-g-12 logo-container">
+                        <p:graphicImage name="images/logo-gray.png" library="paradise-layout" styleClass="logo" />
+                        <p:graphicImage name="images/login/icon-login.png" library="paradise-layout" styleClass="login-icon" />
+                        <h2>Bem vindo ao FJME Sistema</h2>
+                    </div>
+                    <div class="ui-g-12">
+                        <p:outputLabel for="j_username" value="E-mail" />
+                        <div class="input-wrapper">
+                            <p:inputText id="j_username" placeholder="E-mail" />
+                            <i class="fa fa-user" />
+                        </div>
+                    </div>
+                    <div class="ui-g-12">
+                        <p:outputLabel for="j_password" value="Senha" />
+                        <div class="input-wrapper">
+                            <p:password id="j_password" placeholder="Senha" feedback="false" />
+                            <i class="fa fa-lock" />
+                        </div>
+                    </div>
+                    <div class="ui-g-12 chkbox-container">
+                        <div class="ui-g-4 ui-md-4">
+                            <h:outputLink value="#">
+                                Esqueceu a senha?
+                            </h:outputLink>
+                        </div>
+                        <div class="ui-g-4 ui-md-4" style="text-align: center">
+                            <h:outputLink value="/Restaurantes/cadastro/cliente.xhtml">
+                                Cadastre-se
+                            </h:outputLink>
+                        </div>
+                        <div class="ui-g-4 rememberme-container">
+                            <p:outputLabel for="remember-me" value="Lembrar-me"/>
+                            <p:selectBooleanCheckbox id="remember-me" />
+                        </div>
+
+                    </div>
+                    <div class="ui-g-12 button-container">
+                        <p:commandButton action="#{loginMB.login}" ajax="false" update="messages" value="Entrar" styleClass="raised-btn"/>
+                    </div>
+
+                    <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="paradise-layout" />
                 </div>
-                <p:inputText placeholder="Usuário" id="j_username" />
-                <p:password placeholder="Senha" id="j_password" />
-                <p:messages id="messages" showDetail="true" autoUpdate="true" /> 
-                <p:commandButton value="Entrar" actionListener="#{loginMB.login}" ajax="false"/>
-                
-                <br /><br />
-                <p:commandButton  value="Cadastrar" action="/cadastro/cliente.xhtml" />
             </div>
-
-
         </h:form>
-    </body>
+    </h:body>
+
 </html>
