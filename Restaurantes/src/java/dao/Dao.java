@@ -81,6 +81,11 @@ public class Dao implements Serializable {
     public List<Usuario> usuarioLogado2() {
         return (List<Usuario>) em.createNativeQuery("SELECT * FROM USUARIO  where usuario = '" + getUser() + "'", Usuario.class).getResultList();
     }
+    public List<Object[]> usuarioLogado3() {
+        TypedQuery<Object[]> query = (TypedQuery<Object[]>) em.createNativeQuery("select b.nome, a.usuario, a.perfil  from usuario a, pessoa b where a.id_usuario = b.id_usuario and a.usuario = '"+getUser()+"'");
+        List<Object[]> results = query.getResultList();
+        return results;
+    }
     
 
     public String getUser() {
