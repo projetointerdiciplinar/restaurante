@@ -1,298 +1,378 @@
-<!DOCTYPE html>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/templates/Layout.xhtml">
+                template="/WEB-INF/template.xhtml">
 
-    <ui:define name="title-tab">Dashboard</ui:define>
-    <script type="text/javascript">
-        function skinChart() {
-            this.cfg.shadow = false;
-            this.cfg.title = '';
-            this.cfg.seriesColors = ['#3984b8', '#f6ac2b', '#7e8dcd', '#39b8b6'];
-            this.cfg.grid = {
-                background: '#ffffff',
-                borderColor: '#ffffff',
-                gridLineColor: '#dce2e7',
-                shadow: false
-            };
-            this.cfg.axesDefaults = {
-                borderWidth: 0.1,
-                borderColor: 'bdc3c9',
-                rendererOptions: {
-                    textColor: '#757575'
-                }
-            };
-            this.cfg.seriesDefaults = {
-                shadow: false,
-                lineWidth: 1,
-                markerOptions: {
+    <ui:define name="title">Dashboard</ui:define>
+
+    <ui:define name="head">
+        <script type="text/javascript">
+            //<![CDATA[
+            // Blue : #3E98D3  |  Red : #EF3F61  |  Green : #2BB673
+            // Orange : #F15732  |  DarkOliveGreen : #556B2F  |  Gold : #FFD700  |  Salmon : #FA8072  
+            // SaddleBrown : #8B4513  |  Orchid : #9400D3  | Gray : #808080
+            function skinBar() {
+                this.cfg.shadow = false;
+                this.cfg.title = '';
+                this.cfg.seriesColors = ['#DC6061', '#3984B8'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#ffffff',
+                    gridLineColor: '#dee4e9',
+                    shadow: false
+                };
+                this.cfg.axesDefaults = {
+                    borderWidth: 0.1,
+                    borderColor: 'dce2e7',
+                    rendererOptions: {
+                        textColor: '#757575'
+                    }
+                };
+                this.cfg.seriesDefaults = {
                     shadow: false,
-                    size: 7,
-                    style: 'circle'
+                    lineWidth: 1,
+                    renderer: $.jqplot.BarRenderer,
+                    markerOptions: {
+                        shadow: false,
+                        size: 7,
+                        style: 'circle'
+                    }
                 }
             }
-        }
 
-        function skinBar() {
-            this.cfg.shadow = false;
-            this.cfg.title = '';
-            this.cfg.seriesColors = ['#3984b8', '#f6ac2b'];
-            this.cfg.grid = {
-                background: '#ffffff',
-                borderColor: '#ffffff',
-                gridLineColor: '#dce2e7',
-                shadow: false
-            };
-            this.cfg.axesDefaults = {
-                borderWidth: 0.1,
-                borderColor: 'bdc3c9',
-                rendererOptions: {
-                    textColor: '#757575'
-                }
-            };
-            this.cfg.seriesDefaults = {
-                shadow: false,
-                lineWidth: 1,
-                renderer: $.jqplot.BarRenderer,
-                markerOptions: {
+            function skinChartBalanco() {
+                this.cfg.shadow = false;
+                this.cfg.title = '';
+                this.cfg.seriesColors = ['#3984B8', '#EF3F61', '#2BB673', '#F15732'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#ffffff',
+                    gridLineColor: '#F5F5F5',
+                    shadow: false
+                };
+                this.cfg.axesDefaults = {
+                    rendererOptions: {
+                        textColor: '#666F77'
+                    }
+                };
+                this.cfg.seriesDefaults = {
                     shadow: false,
-                    size: 7,
-                    style: 'circle'
+                    lineWidth: 1,
+                    markerOptions: {
+                        shadow: false,
+                        size: 7,
+                        style: 'circle'
+                    }
                 }
             }
-        }
 
-        function skinArea() {
-            this.cfg.shadow = false;
-            this.cfg.title = '';
-            this.cfg.seriesColors = ['#3984b8', '#39b8b6'];
-            this.cfg.grid = {
-                background: '#ffffff',
-                borderColor: '#ffffff',
-                gridLineColor: '#dce2e7',
-                shadow: false
-            };
-            this.cfg.axesDefaults = {
-                borderWidth: 0.1,
-                borderColor: 'bdc3c9',
-                rendererOptions: {
-                    textColor: '#757575'
-                }
-            };
-            this.cfg.seriesDefaults = {
-                shadow: false,
-                lineWidth: 1,
-                markerOptions: {
+            function skinPieMarca() {
+                this.cfg.shadow = false;
+                this.cfg.title = '';
+                this.cfg.seriesColors = ['#3984b8', '#39b8b6', '#7e8dcd', '#f6ac2b', '#bad638'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#ffffff',
+                    gridLineColor: '#dce2e7',
+                    shadow: false
+                };
+                this.cfg.axesDefaults = {
+                    rendererOptions: {
+                        textColor: '#757575',
+                    }
+                };
+                this.cfg.seriesDefaults = {
+                    renderer: $.jqplot.PieRenderer,
                     shadow: false,
-                    size: 7,
-                    style: 'circle'
+                    lineWidth: 1,
+                    markerOptions: {
+                        shadow: false,
+                        size: 7,
+                        style: 'circle'
+                    }
                 }
             }
-        }
 
-        function skinBubble() {
-            this.cfg.shadow = false;
-            this.cfg.title = '';
-            this.cfg.seriesColors = ['#f6ac2b', '#3984b8'];
-            this.cfg.grid = {
-                background: '#ffffff',
-                borderColor: '#ffffff',
-                gridLineColor: '#dce2e7',
-                shadow: false
-            };
-            this.cfg.axesDefaults = {
-                rendererOptions: {
-                    textColor: '#757575'
-                }
-            };
-            this.cfg.seriesDefaults = {
-                shadow: false,
-                lineWidth: 1,
-                renderer: $.jqplot.BubbleRenderer,
-                markerOptions: {
+            function skinPieModelo() {
+                this.cfg.shadow = false;
+                this.cfg.title = '';
+                this.cfg.seriesColors = ['#3984b8', '#39b8b6', '#7e8dcd', '#f6ac2b', '#b85cc8'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#ffffff',
+                    gridLineColor: '#dce2e7',
+                    shadow: false
+                };
+                this.cfg.axesDefaults = {
+                    rendererOptions: {
+                        textColor: '#757575',
+                    }
+                };
+                this.cfg.seriesDefaults = {
+                    renderer: $.jqplot.PieRenderer,
                     shadow: false,
-                    size: 7,
-                    style: 'circle'
+                    lineWidth: 1,
+                    markerOptions: {
+                        shadow: false,
+                        size: 7,
+                        style: 'circle'
+                    }
                 }
             }
-        }
 
-        function skinZoom() {
-            this.cfg.shadow = false;
-            this.cfg.title = '';
-            this.cfg.seriesColors = ['#e175a0', '#39b8b6'];
-            this.cfg.grid = {
-                background: '#ffffff',
-                borderColor: '#ffffff',
-                gridLineColor: '#dce2e7',
-                shadow: false
-            };
-            this.cfg.axesDefaults = {
-                rendererOptions: {
-                    textColor: '#757575'
-                }
-            };
-            this.cfg.seriesDefaults = {
-                shadow: false,
-                lineWidth: 1,
-                markerOptions: {
+            function skinPieCor() {
+                this.cfg.shadow = false;
+                this.cfg.title = '';
+                this.cfg.seriesColors = ['#6C7DC6', '#F5A213', '#DC6092', '#37A533', '#DC6061'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#ffffff',
+                    gridLineColor: '#dce2e7',
+                    shadow: false
+                };
+                this.cfg.axesDefaults = {
+                    rendererOptions: {
+                        textColor: '#757575',
+                    }
+                };
+                this.cfg.seriesDefaults = {
+                    renderer: $.jqplot.PieRenderer,
                     shadow: false,
-                    size: 7,
-                    style: 'circle'
+                    lineWidth: 1,
+                    markerOptions: {
+                        shadow: false,
+                        size: 7,
+                        style: 'circle'
+                    }
                 }
             }
-        }
 
-        function skinPie() {
-            this.cfg.shadow = false;
-            this.cfg.title = '';
-            this.cfg.seriesColors = ['#3984b8', '#f6ac2b', '#7e8dcd', '#39b8b6'];
-            this.cfg.grid = {
-                background: '#ffffff',
-                borderColor: '#ffffff',
-                gridLineColor: '#dce2e7',
-                shadow: false
-            };
-            this.cfg.axesDefaults = {
-                rendererOptions: {
-                    textColor: '#757575',
-                }
-            };
-            this.cfg.seriesDefaults = {
-                renderer: $.jqplot.PieRenderer,
-                shadow: false,
-                lineWidth: 1,
-                markerOptions: {
+            function skinPie() {
+                this.cfg.shadow = false;
+                this.cfg.title = '';
+                this.cfg.seriesColors = ['#6C7DC6', '#F5A213', '#DC6092', '#37A533', '#3376A5'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#ffffff',
+                    gridLineColor: '#dce2e7',
+                    shadow: false
+                };
+                this.cfg.axesDefaults = {
+                    rendererOptions: {
+                        textColor: '#757575',
+                    }
+                };
+                this.cfg.seriesDefaults = {
+                    renderer: $.jqplot.PieRenderer,
                     shadow: false,
-                    size: 7,
-                    style: 'circle'
+                    lineWidth: 1,
+                    markerOptions: {
+                        shadow: false,
+                        size: 7,
+                        style: 'circle'
+                    }
                 }
             }
-        }
 
-        function skinDonut() {
-            this.cfg.shadow = false;
-            this.cfg.title = '';
-            this.cfg.seriesColors = ['#3984b8', '#f6ac2b', '#7e8dcd', '#39b8b6'];
-            this.cfg.grid = {
-                background: '#ffffff',
-                borderColor: '#ffffff',
-                gridLineColor: '#dce2e7',
-                shadow: false
-            };
-            this.cfg.axesDefaults = {
-                rendererOptions: {
-                    textColor: '#757575',
-                }
-            };
-            this.cfg.seriesDefaults = {
-                renderer: $.jqplot.DonutRenderer,
-                shadow: false,
-                lineWidth: 1,
-                markerOptions: {
+            function skinDonut() {
+                this.cfg.shadow = false;
+                this.cfg.title = '';
+                this.cfg.seriesColors = ['#3984B8', '#39B8B6', '#7E8DCD', '#F5A213', '#DC6061'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#ffffff',
+                    gridLineColor: '#dce2e7',
+                    shadow: false
+                };
+                this.cfg.axesDefaults = {
+                    rendererOptions: {
+                        textColor: '#757575',
+                    }
+                };
+                this.cfg.seriesDefaults = {
+                    renderer: $.jqplot.DonutRenderer,
                     shadow: false,
-                    size: 7,
-                    style: 'circle'
+                    lineWidth: 1,
+                    markerOptions: {
+                        shadow: false,
+                        size: 7,
+                        style: 'circle'
+                    }
                 }
             }
-        }
 
-        function skinBarAndLine() {
-            this.cfg.shadow = false;
-            this.cfg.title = '';
-            this.cfg.seriesColors = ['#3984b8', '#7e8dcd'];
-            this.cfg.grid = {
-                background: '#ffffff',
-                borderColor: '#ffffff',
-                gridLineColor: '#dce2e7',
-                shadow: false
-            };
-            this.cfg.axesDefaults = {
-                borderWidth: 0.1,
-                borderColor: 'bdc3c9',
-                rendererOptions: {
-                    textColor: '#757575'
-                }
-            };
-            this.cfg.seriesDefaults = {
-                shadow: false,
-                lineWidth: 5,
-                renderer: $.jqplot.BarRenderer,
-                markerOptions: {
+            function skinDonutPrevPagar() {
+                this.cfg.shadow = false;
+                this.cfg.title = '';
+                this.cfg.seriesColors = ['#3984B8', '#DC6061'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#ffffff',
+                    gridLineColor: '#dce2e7',
+                    shadow: false
+                };
+                this.cfg.axesDefaults = {
+                    rendererOptions: {
+                        textColor: '#757575',
+                    }
+                };
+                this.cfg.seriesDefaults = {
+                    renderer: $.jqplot.DonutRenderer,
                     shadow: false,
-                    size: 7,
-                    style: 'circle'
+                    lineWidth: 1,
+                    markerOptions: {
+                        shadow: false,
+                        size: 7,
+                        style: 'circle'
+                    }
                 }
             }
-        }
 
-        function skinMeterGauge() {
-            this.cfg.title = '';
-            this.cfg.seriesDefaults = {
-                shadow: false,
-                lineWidth: 5,
-                renderer: $.jqplot.MeterGaugeRenderer,
-                rendererOptions: {
+            function skinDonutPrevReceber() {
+                this.cfg.shadow = false;
+                this.cfg.title = '';
+                this.cfg.seriesColors = ['#3984B8', '#F5A213'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#ffffff',
+                    gridLineColor: '#dce2e7',
+                    shadow: false
+                };
+                this.cfg.axesDefaults = {
+                    rendererOptions: {
+                        textColor: '#757575',
+                    }
+                };
+                this.cfg.seriesDefaults = {
+                    renderer: $.jqplot.DonutRenderer,
                     shadow: false,
-                    min: 100,
-                    max: 800,
-                    intervals: [200, 300, 400, 500, 600, 700, 800],
-                    intervalColors: ['#3984b8', '#f6ac2b', '#7e8dcd', '#39b8b6', '#e175a0', '#3eb839', 'dee4e9']
+                    lineWidth: 1,
+                    markerOptions: {
+                        shadow: false,
+                        size: 7,
+                        style: 'circle'
+                    }
                 }
             }
-        }
 
-        function skinMultiAxis() {
-            this.cfg.shadow = false;
-            this.cfg.title = '';
-            this.cfg.seriesColors = ['#3984b8', '#f6ac2b'];
-            this.cfg.grid = {
-                background: '#ffffff',
-                borderColor: '#ffffff',
-                gridLineColor: '#dce2e7',
-                shadow: false
-            };
-            this.cfg.axesDefaults = {
-                borderWidth: 0.1,
-                borderColor: 'bdc3c9',
-                rendererOptions: {
-                    textColor: '#757575'
-                }
-            };
-            this.cfg.seriesDefaults = {
-                shadow: false,
-                lineWidth: 1,
-                renderer: $.jqplot.BarRenderer,
-                markerOptions: {
+            function skinChart() {
+                this.cfg.shadow = false;
+                this.cfg.title = '';
+                this.cfg.seriesColors = ['#DC6061', '#3984B8', '#7e8dcd', '#39b8b6'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#ffffff',
+                    gridLineColor: '#dce2e7',
+                    shadow: false
+                };
+                this.cfg.axesDefaults = {
+                    borderWidth: 0.1,
+                    borderColor: 'bdc3c9',
+                    rendererOptions: {
+                        textColor: '#757575'
+                    }
+                };
+                this.cfg.seriesDefaults = {
                     shadow: false,
-                    size: 7,
-                    style: 'circle'
+                    lineWidth: 1,
+                    markerOptions: {
+                        shadow: false,
+                        size: 7,
+                        style: 'circle'
+                    }
                 }
             }
-        }
-    </script>
-    <style type="text/css">
-        .jqplot-xaxis-label, .jqplot-yaxis-label, .jqplot-y2axis-label, .jqplot-x2axis-label {
-            color: #757575; 
-        }
 
-        table.jqplot-table-legend {
-            background-color: #ffffff;
-            color: #757575;
-            border-color: #dce2e7;
-        }
-    </style>
-    <ui:define name="content">
-        <h1 class="aw-page-title">Dashboard</h1>
+            function donutDatatipEditor(str, seriesIndex, pointIndex, plot) {
+                var strArr = str.split(' - '),
+                        parts = strArr[1].toString().split('.');
 
-        <h:form id="frm">
-            Conteúdo para futuras ideias de graficos...
-        </h:form>
-        
-        <h:outputStylesheet library="usinati" name="styles/layout.css" />
-        <h:outputStylesheet library="usinati" name="styles/components.css" />
+                var value_str = new String(parts[0]);
+                for (var i = 10; i > 0; i--) {
+                    if (value_str == (value_str = value_str.replace(/^(\d+)(\d{3})/, "$1" + $.jqplot.sprintf.thousandsSeparator + "$2")))
+                        break;
+                }
+                parts[0] = value_str;
+
+                return strArr[0] + " - " + parts.join($.jqplot.sprintf.decimalMark);
+            }
+
+            //Codigo resposavel pela formatação valores do chart PrimeFaces.
+            $.jqplot.sprintf.thousandsSeparator = '.';
+            $.jqplot.sprintf.decimalMark = ',';
+            //]]>  
+        </script>
+        <style type="text/css">
+            .main-content {
+                padding: 0;
+            }
+
+            .jqplot-xaxis-label, .jqplot-yaxis-label, .jqplot-y2axis-label, .jqplot-x2axis-label {
+                color: #757575; 
+            }
+
+            table.jqplot-table-legend {
+                background-color: #ffffff;
+                color: #757575;
+                border-color: #dce2e7;
+            }
+
+            .jqplot-highlighter-tooltip, .jqplot-canvasOverlay-tooltip {
+                border: 1px solid #000;
+                background: #000;
+                opacity: 0.7;
+                color: #fff;
+                font-size: .75em;
+                white-space: nowrap;
+                padding: 1px;
+                z-index: 1;
+            }
+        </style>
+
     </ui:define>
+
+    <ui:define name="content">
+        <div class="ui-g dashboard">
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <div class="ui-g card overview-box overview-box-1 no-gutter">
+                    <div class="overview-box-title">Saldo Atual</div>
+                    <div class="overview-box-details">
+                        <i class="fa fa-trophy overview-box-details-icon" />
+                        <span class="overview-box-details-count">R$ 5.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <div class="ui-g card overview-box overview-box-3 no-gutter">
+                    <div class="overview-box-title">Receitas</div>
+                    <div class="overview-box-details">
+                        <i class="fa fa-arrow-up overview-box-details-icon" />
+                        <span class="overview-box-details-count">R$ 15.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <div class="ui-g card overview-box overview-box-2 no-gutter">
+                    <div class="overview-box-title">Despesas</div>
+                    <div class="overview-box-details">
+                        <i class="fa fa-arrow-down overview-box-details-icon" />
+                        <span class="overview-box-details-count">R$ 10.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <div class="ui-g card overview-box overview-box-4 no-gutter">
+                    <div class="overview-box-title">Usuarios</div>
+                    <div class="overview-box-details">
+                        <i class="fa fa-user overview-box-details-icon" />
+                        <span class="overview-box-details-count" >10</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </ui:define>
+
 </ui:composition>

@@ -13,7 +13,22 @@
                     <h:form id="menuform">                      
                         <pv:menu>
                             <p:menuitem id="pm_dashboard" value="Dashboard" icon="fa fa-home" outcome="/sistema/dashboard" />
-                                                         
+                            <p:submenu id="pm_cadastros" label="Cadastro" icon="fa fa-pencil-square-o ">
+                                <p:menuitem id="pm_donoEmpresa" value="Dono da Empresa" icon="fa fa-user" outcome="/sistema/cadastroDono" />
+                                <p:menuitem id="pm_empresa" value="Empresa" icon="fa fa-archive" outcome="/empresa/cadastroEmpresa" />
+                            </p:submenu> 
+                            
+                            <p:submenu id="pm_pedidos" label="Pedidos" icon="fa fa-pencil-square-o ">
+                                <p:menuitem id="pm_aberto" value="Em Aberto" icon="fa fa-list" outcome="/empresa/index" />
+                            </p:submenu>  
+                            
+                            <p:submenu id="pm_areaCliente" label="Area do Cliente" icon="fa fa-pencil-square-o ">
+                                <p:menuitem id="pm_reserva" value="Fazer Reserva" icon="fa fa-list" outcome="/areaDoCliente/index" />
+                            </p:submenu>  
+                            <p:submenu id="pm_relatorio" label="Relatorios" icon="fa fa-pencil-square-o ">
+                                <p:menuitem id="pm_todosClientes" value="Todos Clientes" icon="fa fa-users" outcome="/sistema/todosCliente" />
+                                <p:menuitem id="pm_todasEmpresas" value="Todas Empresas" icon="fa fa-archive" outcome="/sistema/todasEmpresa" />
+                            </p:submenu>
 
                             
                         </pv:menu>

@@ -3,137 +3,148 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/templates/Layout.xhtml">
+                template="/WEB-INF/template.xhtml">
 
-    <ui:define name="title-tab">Identificação</ui:define>
-    <ui:define name="content">
-        <style>
-            .ui-growl{
-                position:fixed;
-                top:100px;
-                right:20px;
-                width:301px;
+    <ui:define name="title-tab">Sobre Dono Empresa</ui:define>
+    <ui:define name="head">
+        <style type="text/css">
+            .ui-panelgrid.form-elements .ui-grc-2 {
+                padding-left: 80px;
             }
-        </style>  
 
-        <span class="gray">          
+            @media (max-width:1024px) {
+                .ui-panelgrid.form-elements .ui-grc-2 {
+                    padding-left: 20px;
+                }
+            }
 
-            <h:form id="formIdentificacao">
-                <p:messages id="menssagem" showDetail="true" closable="true"/>    
-                <p:panel id="basic" styleClass="ui-panelgrid-blank form-group" style="margin-bottom:10px; border:0px none; background-color:transparent;">   
-                    <div class="ui-fluid">
-                        <br/>
-                        <h2 class="CardBigTopic">Sobre Dono Empresa</h2>
-                        <p:panelGrid id="idPanelIdentificacao" columns="2" layout="grid"
-                                     columnClasses="ui-grid-col-6,ui-grid-col-6"
-                                     styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">
+            @media (max-width:640px) {
+                .ui-panelgrid.form-elements .ui-grc-2 {
+                    padding-left: 6px;
+                }
+            }
+        </style>
+    </ui:define>
 
-                            <p:panel id="basic_valores_venda" header="Dados Pessoais" style="margin-bottom:10px" >
+    <ui:define name="content">
+        <div class="ui-fluid">
+            <div class="ui-g">
+                <div class="ui-g-12">        
+                    <h:form id="formIdentificacao">
+                        <p:growl id="menssagem" showDetail="true" sticky="false" />
+                        <div class="card card-w-title">
+                            <p:panel id="basic" styleClass="ui-panelgrid-blank form-group" style="margin-bottom:10px; border:0px none; background-color:transparent;">   
                                 <div class="ui-fluid">
-                                    <p:panelGrid columns="2" layout="grid" 
-                                                 columnClasses="ui-grid-col-12,ui-grid-col-6"
-                                                 styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;"> 
-                                        <p:outputLabel value="Nome Completo: "/>
-                                        <br/><br/>
-                                        <p:inputText value="#{pessoaMB.pessoa.nome}"/>
-                                        <br/><br/>
-                                        <p:outputLabel value="E-mail: "/>
-                                        <br/><br/>
-                                        <p:inputText id="email" required="true" label="email" size="40"
-                                                     requiredMessage="Entre com seu email."
-                                                     validatorMessage="Email ivalido"
-                                                     value="#{pessoaMB.pessoa.email}">
+                                    <h1>Sobre Dono Empresa</h1>
+                                    <p:panelGrid id="idPanelIdentificacao" columns="2" layout="grid"
+                                                 columnClasses="ui-grid-col-6,ui-grid-col-6"
+                                                 styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">
 
-                                            <f:validateRegex
-                                                pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                        <p:panel id="basic_valores_venda" header="Dados Pessoais" style="margin-bottom:10px" >
+                                            <div class="ui-fluid">
+                                                <p:panelGrid columns="2" layout="grid" 
+                                                             columnClasses="ui-grid-col-12,ui-grid-col-6"
+                                                             styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;"> 
+                                                    <p:outputLabel value="Nome Completo: "/>
+                                                    <br/><br/>
+                                                    <p:inputText value="#{pessoaMB.pessoa.nome}"/>
+                                                    <br/><br/>
+                                                    <p:outputLabel value="E-mail: "/>
+                                                    <br/><br/>
+                                                    <p:inputText id="email" required="true" label="email" size="40"
+                                                                 requiredMessage="Entre com seu email."
+                                                                 validatorMessage="Email ivalido"
+                                                                 value="#{pessoaMB.pessoa.email}">
 
-                                        </p:inputText>
-                                        <p:watermark for="email" value="Email" />
-                                        <p:outputLabel/>
-                                        <br/><br/>
-                                        <p:outputLabel value="Telefone: "/>
-                                        <br/><br/>
-                                        <p:inputMask value = "#{pessoaMB.pessoa.telefone}" mask="(99)9999-9999"></p:inputMask>
-                                        <br/><br/>
-                                        <p:outputLabel value="Celular: "/>
-                                        <br/><br/>
-                                        <p:inputMask value = "#{pessoaMB.pessoa.celular}" mask="(99)99999-9999"></p:inputMask>
-                                        <br/><br/>
-                                        <p:outputLabel value="Rg: " />
-                                        <br/><br/>
-                                        <p:inputText value="#{pessoaMB.pessoa.rg}"/>
-                                       
+                                                        <f:validateRegex
+                                                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/> 
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/> 
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/> 
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/>
+                                                    </p:inputText>
+                                                    <p:watermark for="email" value="Email" />
+                                                    <p:outputLabel/>
+                                                    <br/><br/>
+                                                    <p:outputLabel value="Telefone: "/>
+                                                    <br/><br/>
+                                                    <p:inputMask value = "#{pessoaMB.pessoa.telefone}" mask="(99)9999-9999"></p:inputMask>
+                                                    <br/><br/>
+                                                    <p:outputLabel value="Celular: "/>
+                                                    <br/><br/>
+                                                    <p:inputMask value = "#{pessoaMB.pessoa.celular}" mask="(99)99999-9999"></p:inputMask>
+                                                    <br/><br/>
+                                                    <p:outputLabel value="Rg: " />
+                                                    <br/><br/>
+                                                    <p:inputText value="#{pessoaMB.pessoa.rg}"/>
+
+
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/> 
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/> 
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/> 
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/>
+                                                </p:panelGrid>
+                                            </div>
+
+                                        </p:panel>
+                                        <p:panel id="basic_pagamento" header="Dados de acesso" style="margin-bottom:10px">
+
+                                            <div class="ui-fluid">
+                                                <p:panelGrid columns="2" layout="grid"  
+                                                             columnClasses="ui-grid-col-12,ui-grid-col-6"
+                                                             style="border: transparent !important">
+
+                                                    <p:outputLabel value="CPF: "/>
+                                                    <br/><br/>
+                                                    <p:inputMask mask="999.999.999-99" id="msCpf" value="#{pessoaMB.cpf}" />
+                                                    <br/><br/>
+                                                    <p:outputLabel value="Senha: "/>
+                                                    <br/><br/>
+                                                    <p:password value="#{pessoaMB.pessoa.senha}"  />
+                                                    <br/><br/>
+
+                                                    <p:outputLabel value="Confirmar Senha: "/>
+                                                    <br/><br/>
+                                                    <p:password value="#{pessoaMB.confirmaSenha}"    /><br/><br/>
+
+
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/> 
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/> 
+                                                    <p:outputLabel value=""/>
+                                                    <p:outputLabel value=""/>
+
+                                                    <br/><br/>
+                                                    <p:outputLabel />
+                                                    <p:commandButton value="Salvar" update="formIdentificacao" actionListener="#{pessoaMB.gravarDoEmpresa}"  
+                                                                     icon="fa fa-check" />
+                                                    <br/><br/>
+                                                    <br/><br/>
+
+                                                </p:panelGrid>
+                                            </div>
+                                        </p:panel>
                                     </p:panelGrid>
+
                                 </div>
-
-                            </p:panel>
-                            <p:panel id="basic_pagamento" header="Dados de acesso" style="margin-bottom:10px">
-
-                                <div class="ui-fluid">
-                                    <p:panelGrid columns="2" layout="grid"  
-                                                 columnClasses="ui-grid-col-12,ui-grid-col-6"
-                                                 style="border: transparent !important">
-
-                                        <p:outputLabel value="CPF: "/>
-                                        <br/><br/>
-                                        <p:inputMask mask="999.999.999-99" id="msCpf" value="#{pessoaMB.cpf}" />
-                                        <br/><br/>
-                                        <p:outputLabel value="Senha: "/>
-                                        <br/><br/>
-                                        <p:password value="#{pessoaMB.pessoa.senha}"  />
-                                        <br/><br/>
-
-                                        <p:outputLabel value="Confirmar Senha: "/>
-                                        <br/><br/>
-                                        <p:password value="#{pessoaMB.confirmaSenha}"    /><br/><br/>
-
-
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/> 
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/> 
-                                        <p:outputLabel value=""/>
-                                        <p:outputLabel value=""/>
-
-                                        <br/><br/>
-                                        <p:outputLabel />
-                                        <p:commandButton value="Salvar" update="formIdentificacao" actionListener="#{pessoaMB.gravarDoEmpresa}"  
-                                                         icon="fa fa-check" />
-                                        <br/><br/>
-                                        <br/><br/>
-
-                                    </p:panelGrid>
-                                </div>
-                            </p:panel>
-                        </p:panelGrid>
-
-                    </div>
-                </p:panel> 
-            </h:form>
-
-
-
-        </span>
-
+                            </p:panel> 
+                        </div>
+                    </h:form>
+                </div> 
+            </div> 
+        </div> 
     </ui:define>
 </ui:composition>

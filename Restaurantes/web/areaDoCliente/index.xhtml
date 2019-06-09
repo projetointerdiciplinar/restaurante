@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
-    <ui:define name="title">Veiculos no Patio</ui:define>
+    <ui:define name="title">Reserva de Restaurante</ui:define>
 
     <ui:define name="head">
         <style type="text/css">
@@ -24,25 +24,39 @@
                     padding-left: 6px;
                 }
             }
-            
+            img {
+                max-width:200px;
+                max-height:150px;
+                width: auto;
+                height: auto;
+            }
+
         </style>
     </ui:define>
 
     <ui:define name="content">
-        <h:form id="form">
-            <p:dataGrid var="empresa" value="#{empresaMB.listaEmpresa}" columns="3" layout="grid"
-                        rows="12" paginator="true" id="cars"
-                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                        rowsPerPageTemplate="6,12,16">
+        <div class="ui-fluid">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <h:form id="form">
+                        <div class="card card-w-title">
+                            <p:dataGrid var="empresa" value="#{empresaMB.listaEmpresa}" columns="3" layout="grid"
+                                        rows="12" paginator="true" id="cars"
+                                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                        rowsPerPageTemplate="6,12,16">
 
-                <p:panel header="#{empresa.nomeRestaurante}" style="text-align:center">
-                    <h:panelGrid columns="1" style="width:100%">
-                        <p:graphicImage name="ims/res/#{empresa.imagem}"/> 
-                        <h:outputText value="#{empresa.telefone}" />
-                        <h:outputText value="#{empresa.cidade} / #{empresa.estado}" />
-                    </h:panelGrid>
-                </p:panel>
-            </p:dataGrid>
-        </h:form>
+                                <p:panel header="#{empresa.nomeRestaurante}" style="text-align:center">
+                                    <h:panelGrid columns="1" style="width:100%">
+                                        <p:graphicImage name="ims/res/#{empresa.imagem}"/> 
+                                        <h:outputText value="#{empresa.telefone}" />
+                                        <h:outputText value="#{empresa.cidade} / #{empresa.estado}" />
+                                    </h:panelGrid>
+                                </p:panel>
+                            </p:dataGrid>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
     </ui:define>
 </ui:composition>
