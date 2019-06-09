@@ -30,7 +30,7 @@
         <div class="ui-fluid">
             <div class="ui-g">
                 <div class="ui-g-12">  
-                    <h:form id="formCliente">
+                    <h:form id="formCliente"  enctype="multipart/form-data">
                         <p:growl id="menssagem" showDetail="true" sticky="false" />
                         <div class="card card-w-title">
                             <h1>Cadastro da Empresa</h1>
@@ -100,14 +100,23 @@
                                 </p:selectOneMenu>                                
                                 <p:outputLabel for="idTel" value="Telefone:"/>
                                 <p:inputMask id="idTel" value = "#{empresaMB.empresa.telefone}" mask="(99)9999-9999"></p:inputMask>
-                                <p:outputLabel for="idTel" value="Imagem*"/>
-                                <p:fileUpload value="#{fileUploadView.file}" mode="simple" skinSimple="true"/>
+                                <p:growl showDetail="true" />
+
+                                <h:panelGrid columns="2">
+                                   <p:fileUpload value="#{empresaMB.uploadedFile}"
+					id="fileUpload" mode="simple" skinSimple="true" />
+                                   
+                                    <h:outputText />
+
+                                </h:panelGrid>
+
+                                <p:spacer height="20px" />
                             </p:panelGrid>
                             <br/>
                             <p:panelGrid columns="4" layout="grid"
                                          columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-6"
                                          styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">
-                                <p:commandButton value="Salvar" actionListener="#{empresaMB.gravar}" update="formCliente,formCliente2"
+                                <p:commandButton value="Salvar" ajax="false" actionListener="#{empresaMB.gravar}" update="formCliente,formCliente2"
                                                  icon="fa fa-check"/>
                                 <p:commandButton  onclick="history.go(0); return false;" value="Cancelar"
                                                   icon="fa fa-close"/>                                  
@@ -121,6 +130,11 @@
                                 </p:confirmDialog>
                             </p:panelGrid>
                         </div>
+                    </h:form>
+                    <h:form enctype="multipart/form-data">
+
+
+
                     </h:form>
                     <h:form id="formCliente2">
                         <div class="card card-w-title">

@@ -6,16 +6,22 @@
 package ctr;
 
 import dao.Dao;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import model.Empresa;
 import model.Usuario;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
+import util.ArquivoUtil;
 import util.FacesUtil;
 
 /**
@@ -24,24 +30,32 @@ import util.FacesUtil;
  */
 @ManagedBean
 @ViewScoped
-public class EmpresaMB implements Serializable{
+public class EmpresaMB implements Serializable {
+
     private Empresa empresa;
     private Usuario usuario;
     private Dao dao;
     private UploadedFile uploadedFile;
     private List<Empresa> listaEmpresa = new ArrayList<Empresa>();
     private List<Usuario> listaUsuario = new ArrayList<Usuario>();
-    
-    private String cnpj, user;
+    private List<File> arquivos = new ArrayList<>();
+
+    @PostConstruct
+    public void postConstruct() {
+        arquivos = new ArrayList<>(ArquivoUtil.listar());
+    }
+
+    private String cnpj, user, img;
     private Integer idUser;
-    
-    public EmpresaMB(){
+
+    public EmpresaMB() {
         dao = (Dao) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("dao");
         novo();
     }
-    public void novo(){
-        empresa      = new Empresa();
-        usuario      = new Usuario();
+
+    public void novo() {
+        empresa = new Empresa();
+        usuario = new Usuario();
         listaEmpresa = new ArrayList<Empresa>();
         listaUsuario = new ArrayList<Usuario>();
         listaUsuario = (List<Usuario>) dao.usuarioLogado2();
@@ -50,21 +64,48 @@ public class EmpresaMB implements Serializable{
         setUser(listaUsuario.get(0).getUsuario());
         setIdUser(listaUsuario.get(0).getIdUsuario());
     }
-    
-    public void gravar (ActionEvent evt)
-    {
+
+    public void upload() {
         try {
+            File arquivo = ArquivoUtil.escrever(uploadedFile.getFileName(), uploadedFile.getContents());
+
+            arquivos.add(arquivo);
+            setImg(arquivo.getName());
+            System.out.println("nome da imagem: " + getImg());
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Upload completo", "O arquivo " + arquivo.getName() + " foi salvo!"));
+        } catch (IOException e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
+        }
+    }
+
+    public void gravar(ActionEvent evt) {
+        try {
+            File arquivo = ArquivoUtil.escrever(uploadedFile.getFileName(), uploadedFile.getContents());
+
+            arquivos.add(arquivo);
+            setImg(arquivo.getName());
+            System.out.println("nome da imagem: " + getImg());
+            
             usuario.setIdUsuario(getIdUser());
+            //empresa.setImagem(file.getFileName());
             empresa.setUsuario(usuario);
+            empresa.setImagem(getImg());
             dao.gravar(empresa);
             /*listarMarcaVeiculo = (List<Marca>) dao.buscarTodos(Marca.class);*/
             empresa = new Empresa();
-             FacesUtil.addInfoMessage("Informação", "Cadastro salvo com sucesso!");
-             novo();
+            FacesUtil.addInfoMessage("Informação", "Cadastro salvo com sucesso!");
+            novo();
         } catch (Exception ex) {
             FacesUtil.addErrorMessage("Erro", "Entre em contato com suporte!");
             ex.printStackTrace();
         }
+    }
+
+    public void handleFileUpload(FileUploadEvent event) {
+        FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public Empresa getEmpresa() {
@@ -138,6 +179,21 @@ public class EmpresaMB implements Serializable{
     public void setUploadedFile(UploadedFile uploadedFile) {
         this.uploadedFile = uploadedFile;
     }
-    
-    
+
+    public List<File> getArquivos() {
+        return arquivos;
+    }
+
+    public void setArquivos(List<File> arquivos) {
+        this.arquivos = arquivos;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
 }
