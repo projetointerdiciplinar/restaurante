@@ -11,7 +11,7 @@
             <div class="card card-w-title">
                 <p:dataTable id="tabela" value="#{pessoaMB.listaCliente}" var="cliente" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="10,20,30,50" emptyMessage="Nenhuma informação..." reflow="true"  >
-                    <p:column headerText="Nome Restaurante" width="40" sortBy="#{cliente.nome}">
+                    <p:column headerText="Nome" width="40" sortBy="#{cliente.nome}">
                         <h:outputText value="#{cliente.nome}"/>
                     </p:column>
                     <p:column headerText="CPF" width="10" sortBy="#{cliente.cpf}">

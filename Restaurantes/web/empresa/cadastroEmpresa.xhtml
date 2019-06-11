@@ -101,13 +101,17 @@
                                 <p:outputLabel for="idTel" value="Telefone:"/>
                                 <p:inputMask id="idTel" value = "#{empresaMB.empresa.telefone}" mask="(99)9999-9999"></p:inputMask>
                                 <p:growl showDetail="true" />
-
+                                <p:outputLabel value="Imagem:  " style="visibility: hidden" for="fileUpload" />
+                                <p:outputLabel value="Imagem:  " style="visibility: hidden"  />
+                                <p:outputLabel value="Imagem:  " style="visibility: hidden"  />
+                                <p:outputLabel value="Imagem:  " style="visibility: hidden"  />
                                 <h:panelGrid columns="2">
-                                   <p:fileUpload value="#{empresaMB.uploadedFile}"
-					id="fileUpload" mode="simple" skinSimple="true" />
-                                   
-                                    <h:outputText />
+                                    <p:fileUpload value="#{empresaMB.uploadedFile}"
+                                                  id="fileUpload" mode="simple" skinSimple="true" />
+                                    
 
+                                    <h:outputText />
+                                    
                                 </h:panelGrid>
 
                                 <p:spacer height="20px" />
