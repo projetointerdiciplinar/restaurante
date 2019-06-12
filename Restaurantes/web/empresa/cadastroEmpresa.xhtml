@@ -34,28 +34,19 @@
                         <p:growl id="menssagem" showDetail="true" sticky="false" />
                         <div class="card card-w-title">
                             <h1>Cadastro da Empresa</h1>
-                            <p:panelGrid columns="6" layout="grid"
-                                         columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-1,ui-g-12 ui-md-1,ui-g-12 ui-md-4,ui-g-12 ui-md-1,ui-g-12 ui-md-4"                                  
-                                         styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">                              
-                                <p:outputLabel value="Código:" for="idCod"/>
-                                <p:inputText id="idCod" value="#{empresaMB.empresa.idEmpresa}" disabled="true"/>
-                                <p:outputLabel value="Razão Social: " for="idNome" indicateRequired="false"/>
-                                <p:inputText id="idNome" value="#{empresaMB.empresa.razaoSocial}" required="true" requiredMessage="Razão Social obrigatório!"/>
+                            <p:panelGrid columns="3" layout="grid"
+                                         columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-7,ui-g-12 ui-md-4"                                  
+                                         styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">                                                            
                                 <p:outputLabel value="Nome Restaurante: " for="idFantasia" indicateRequired="false"/>
-                                <p:inputText id="idFantasia" value = "#{empresaMB.empresa.nomeRestaurante}" required="true" requiredMessage="Nome do Restaurante obrigatório!"/>                        
-                            </p:panelGrid> 
-
-                            <p:panelGrid columns="6" id="pnlPessoa" layout="grid"
-                                         columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-3,ui-g-12 ui-md-1,ui-g-12 ui-md-2,ui-g-12 ui-md-1,ui-g-12 ui-md-4"  
-                                         styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">                         
+                                <p:inputText id="idFantasia" value = "#{empresaMB.empresa.nomeRestaurante}" required="true" requiredMessage="Nome do Restaurante obrigatório!"/>                                                
+                                </p:panelGrid>
+                                
+                                <p:panelGrid columns="6" layout="grid"
+                                         columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-3,ui-g-12 ui-md-1,ui-g-12 ui-md-3,ui-g-12 ui-md-1,ui-g-12 ui-md-3"                                  
+                                         styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">
                                 <p:outputLabel id="idCnpj" value="CNPJ:" /> 
                                 <p:inputMask mask="99.999.999/9999-99" id="msCnpj" 
-                                             value="#{empresaMB.empresa.cnpj}" />
-                            </p:panelGrid>
-
-                            <p:panelGrid columns="6" layout="grid"  
-                                         columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-3,ui-g-12 ui-md-1,ui-g-12 ui-md-2,ui-g-12 ui-md-1,ui-g-12 ui-md-4"
-                                         styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">
+                                             value="#{empresaMB.empresa.cnpj}" />                       
                                 <p:outputLabel for="idEnd" value="Endereço:"/>
                                 <p:inputText id="idEnd" value="#{empresaMB.empresa.endereco}" />
                                 <p:outputLabel for="idNumero" value="Número:"/>
@@ -100,19 +91,13 @@
                                 </p:selectOneMenu>                                
                                 <p:outputLabel for="idTel" value="Telefone:"/>
                                 <p:inputMask id="idTel" value = "#{empresaMB.empresa.telefone}" mask="(99)9999-9999"></p:inputMask>
-                                <p:growl showDetail="true" />
-                                <p:outputLabel value="Imagem:  " style="visibility: hidden" for="fileUpload" />
-                                <p:outputLabel value="Imagem:  " style="visibility: hidden"  />
-                                <p:outputLabel value="Imagem:  " style="visibility: hidden"  />
-                                <p:outputLabel value="Imagem:  " style="visibility: hidden"  />
-                                <h:panelGrid columns="2">
-                                    <p:fileUpload value="#{empresaMB.uploadedFile}"
-                                                  id="fileUpload" mode="simple" skinSimple="true" />
-                                    
+                              
+                                <p:outputLabel value="Imagem: " style="visibility: hidden" for="fileUpload" />
+           
 
-                                    <h:outputText />
-                                    
-                                </h:panelGrid>
+                                    <p:fileUpload value="#{empresaMB.uploadedFile}"
+                                                  id="fileUpload" mode="simple" skinSimple="true" />                                   
+                             
 
                                 <p:spacer height="20px" />
                             </p:panelGrid>
@@ -144,10 +129,10 @@
                         <div class="card card-w-title">
                             <p:dataTable id="tabela" value="#{empresaMB.listaEmpresa}" var="empresa" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                          rowsPerPageTemplate="10,20,30,50" emptyMessage="Nenhuma informação..." reflow="true"  >
-                                <p:column headerText="Nome Restaurante" width="40" sortBy="#{empresa.nomeRestaurante}">
+                                <p:column headerText="Restaurante" width="40" sortBy="#{empresa.nomeRestaurante}">
                                     <h:outputText value="#{empresa.nomeRestaurante}"/>
                                 </p:column>
-                                <p:column headerText="Cnpj" width="10" sortBy="#{empresa.cnpj}">
+                                <p:column headerText="CNPJ" width="10" sortBy="#{empresa.cnpj}">
                                     <h:outputText value="#{empresa.cnpj}"/>
                                 </p:column> 
                                 <p:column headerText="Cidade" width="20" sortBy="#{empresa.cidade}">

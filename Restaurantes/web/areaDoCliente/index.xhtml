@@ -30,7 +30,6 @@
                 width: auto;
                 height: auto;
             }
-
         </style>
     </ui:define>
 
@@ -38,22 +37,68 @@
         <div class="ui-fluid">
             <div class="ui-g">
                 <div class="ui-g-12">
-                    <h:form id="form">
+                    <h:form id="formReserva">
                         <div class="card card-w-title">
+                            <h1>Restaurantes Disponíveis</h1>
                             <p:dataGrid var="empresa" value="#{empresaMB.listaEmpresa}" columns="3" layout="grid"
                                         rows="12" paginator="true" id="cars"
                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                         rowsPerPageTemplate="6,12,16">
-
                                 <p:panel header="#{empresa.nomeRestaurante}" style="text-align:center">
                                     <h:panelGrid columns="1" style="width:100%">
                                         <p:graphicImage name="ims/res/#{empresa.imagem}"/> 
                                         <h:outputText value="#{empresa.telefone}" />
                                         <h:outputText value="#{empresa.cidade} / #{empresa.estado}" />
+
+                                        <p:commandLink oncomplete="PF('dialogReserva').show()" title="Reservar">
+                                            <h:outputText styleClass="fa fa-calendar" style="margin:0 auto;"/>                                       
+                                        </p:commandLink>
                                     </h:panelGrid>
                                 </p:panel>
                             </p:dataGrid>
                         </div>
+
+                        <p:dialog id="idDialog" widgetVar="dialogReserva"  width="900" height="550" responsive="true" modal="true" resizable="false">
+                            <p:panelGrid id="idPanelIdentificacao" columns="2" layout="grid"
+                                         columnClasses="ui-grid-col-7,ui-grid-col-5"
+                                         styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">
+
+                                <p:panel id="basicImagem" style="margin-bottom:10px; border: none">
+                                    <div class="ui-fluid">
+                                        <div class="card">
+                                            <h1>Churrasco na Brasa</h1>
+                                            <p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="337" showCaption="true" style="border: none">
+                                                <p:graphicImage name="resources/demo/images/nature/#{image}" title="#{image}"/>
+                                            </p:galleria>
+                                        </div>
+                                    </div>
+                                </p:panel>
+
+                                <p:panel id="basic_pagamento" style="margin-bottom:10px; border: none">
+                                    <div class="ui-fluid">
+                                        <div class="card">
+                                            <h1>Reserve sua mesa</h1>
+                                            <p:tabView>
+                                                <p:tab title="I">
+                                                    <p:calendar locale="br" pattern="dd/MM/yyyy" id="inline" mode="inline" />                                                   
+                                                </p:tab>
+                                                <p:tab title="II">
+                                                    <p:calendar locale="br" pattern="dd/MM/yyyy" id="inline2" mode="inline" />
+                                                </p:tab>
+                                                <p:tab title="III">
+                                                    <p:calendar locale="br" pattern="dd/MM/yyyy" id="inline3" mode="inline" />
+                                                </p:tab>
+                                            </p:tabView>
+                                        </div>
+                                    </div>
+                                </p:panel>
+
+                            </p:panelGrid>
+
+
+
+
+                        </p:dialog>
                     </h:form>
                 </div>
             </div>

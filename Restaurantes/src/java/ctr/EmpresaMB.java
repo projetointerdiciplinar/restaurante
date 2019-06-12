@@ -87,7 +87,7 @@ public class EmpresaMB implements Serializable {
             arquivos.add(arquivo);
             setImg(arquivo.getName());
             System.out.println("nome da imagem: " + getImg());
-            
+            empresa.setRazaoSocial("teste");
             usuario.setIdUsuario(getIdUser());
             //empresa.setImagem(file.getFileName());
             empresa.setUsuario(usuario);

@@ -22,7 +22,7 @@ public class Empresa implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_empresa", unique = true, nullable = false)
     private Integer idEmpresa;
-    @Column(name = "razao_social", nullable = false)
+    @Column(name = "razao_social", nullable = true)
     private String razaoSocial;
     @Column(name = "nome_restaurante", nullable = false)
     private String nomeRestaurante;
