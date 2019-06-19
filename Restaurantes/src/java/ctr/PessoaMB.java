@@ -72,6 +72,7 @@ public class PessoaMB implements Serializable {
                 dao.gravar(usuario);
                 dao.gravar(pessoa);
                 novo();
+                setCpf("");
                 FacesUtil.addInfoMessage("Informação", "Cadastro realizado com sucesso!");
             }
 
