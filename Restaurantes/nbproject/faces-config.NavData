@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
-    <Scope Scope="Project"/>
+    <Scope Scope="Project">
+        <Node id="sistema/todosCliente.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="cadastro/cliente.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="areaDoCliente/index.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="empresa/upload-basico.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="empresa/cadastroEmpresa.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="sistema/empresario.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="sistema/todasEmpresa.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="login.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="acessoNegado.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="areaDoCliente/404.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="empresa/index.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="sistema/marca.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="sistema/404.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="sistema/dashboard.xhtml" x="400" y="300" zoom="true"/>
+    </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>

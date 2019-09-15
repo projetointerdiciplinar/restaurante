@@ -8,6 +8,9 @@
     <ui:define name="title-tab">Todos Clientes</ui:define>
     <ui:define name="content">
         <h:form id="formCliente2">
+            <p:outputLabel for="idMarca" value="Minha API" />
+            <p:inputText id="idMarca" value="#{pessoaMB.api}"/>
+            <p:commandButton value="Salvar"  icon="fa fa-check" actionListener="#{pessoaMB.cadastrarApi}"/>
             <div class="card card-w-title">
                 <p:dataTable id="tabela" value="#{pessoaMB.listaCliente}" var="cliente" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="10,20,30,50" emptyMessage="Nenhuma informação..." reflow="true"  >

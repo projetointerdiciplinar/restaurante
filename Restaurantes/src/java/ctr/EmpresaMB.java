@@ -39,6 +39,7 @@ public class EmpresaMB implements Serializable {
     private List<Empresa> listaEmpresa = new ArrayList<Empresa>();
     private List<Usuario> listaUsuario = new ArrayList<Usuario>();
     private List<File> arquivos = new ArrayList<>();
+    private boolean alterar;
 
     @PostConstruct
     public void postConstruct() {
@@ -63,6 +64,7 @@ public class EmpresaMB implements Serializable {
         System.out.println("===========" + listaUsuario.get(0).getUsuario());
         setUser(listaUsuario.get(0).getUsuario());
         setIdUser(listaUsuario.get(0).getIdUsuario());
+        setAlterar(false);
     }
 
     public void upload() {
@@ -82,10 +84,13 @@ public class EmpresaMB implements Serializable {
 
     public void gravar(ActionEvent evt) {
         try {
-            File arquivo = ArquivoUtil.escrever(uploadedFile.getFileName(), uploadedFile.getContents());
 
-            arquivos.add(arquivo);
-            setImg(arquivo.getName());
+            if (!isAlterar()) {
+                File arquivo = ArquivoUtil.escrever(uploadedFile.getFileName(), uploadedFile.getContents());
+                arquivos.add(arquivo);
+                setImg(arquivo.getName());
+            }
+
             System.out.println("nome da imagem: " + getImg());
             empresa.setRazaoSocial("teste");
             usuario.setIdUsuario(getIdUser());
@@ -100,6 +105,24 @@ public class EmpresaMB implements Serializable {
         } catch (Exception ex) {
             FacesUtil.addErrorMessage("Erro", "Entre em contato com suporte!");
             ex.printStackTrace();
+        }
+    }
+
+    public void alterarEmpresa() {
+        empresa = (Empresa) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("empresa");
+        setAlterar(true);
+        setImg(empresa.getImagem());
+        
+    }
+
+    public void excluir(ActionEvent evt) {
+        try {
+            dao.remover(empresa);
+            empresa = new Empresa();
+            FacesUtil.addInfoMessage("Informação", "Excluido com sucesso!");
+            listaEmpresa = new ArrayList<Empresa>();
+        } catch (Exception ex) {
+            FacesUtil.addWarnMessage("Atenção", "Cadastro está viculado a um registro!");
         }
     }
 
@@ -194,6 +217,14 @@ public class EmpresaMB implements Serializable {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public boolean isAlterar() {
+        return alterar;
+    }
+
+    public void setAlterar(boolean alterar) {
+        this.alterar = alterar;
     }
 
 }

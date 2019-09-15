@@ -95,7 +95,7 @@
                                 <p:outputLabel value="Imagem: " style="visibility: hidden" for="fileUpload" />
            
 
-                                    <p:fileUpload value="#{empresaMB.uploadedFile}"
+                                <p:fileUpload disabled="#{(empresaMB.alterar)?true:false}" value="#{empresaMB.uploadedFile}"
                                                   id="fileUpload" mode="simple" skinSimple="true" />                                   
                              
 
@@ -110,7 +110,7 @@
                                 <p:commandButton  onclick="history.go(0); return false;" value="Cancelar"
                                                   icon="fa fa-close"/>                                  
                                 <p:commandButton value="Excluir" actionListener="#{empresaMB.excluir}"
-                                                 icon="fa fa-trash" update="formCliente, menssagem" process="@this">
+                                                 icon="fa fa-trash" update="formCliente, menssagem, formCliente2"  process="@this">
                                     <p:confirm header="Confirmação" message="Você tem certeza ?" icon="ui-icon-alert" />
                                 </p:commandButton>
                                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
@@ -142,7 +142,7 @@
                                     <h:outputText value="#{empresa.telefone}"/>
                                 </p:column>
                                 <p:column style="text-align: center; width:1%"> 
-                                    <p:commandLink title="Editar" id="alterar" actionListener="#{empresaMB.alterarCliente()}" update="formCliente,formCliente2" process="@this" >
+                                    <p:commandLink title="Editar" id="alterar" actionListener="#{empresaMB.alterarEmpresa}" update="formCliente,formCliente2" process="@this" >
                                         <i class="fa fa-pencil-square-o"></i>
                                     </p:commandLink>
                                 </p:column>

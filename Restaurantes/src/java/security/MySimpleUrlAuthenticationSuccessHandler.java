@@ -78,9 +78,9 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
             System.out.println("=================cliente");
             return "/areaDoCliente/index.xhtml";
         } else if (isAdmin) {
-            return "/sistema/dashboard.xhtml";
+            return "/sistema/empresario.xhtml";
         } else if (isEmpresa) {
-            return "/empresa/index.xhtml";
+            return "/empresa/cadastroEmpresa.xhtml";
         } else {
             throw new IllegalStateException();
         }
