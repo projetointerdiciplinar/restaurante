@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.primefaces.paradise.view.multimedia;
+package com.ajwebmotors.paradise.view.multimedia;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class ImagesView {
     public void init() {
         images = new ArrayList<String>();
         for (int i = 1; i <= 12; i++) {
-            images.add("nature" + i + ".jpg");
+            images.add(i + ".jpg");
         }
     }
 

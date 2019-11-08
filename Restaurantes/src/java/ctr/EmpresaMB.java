@@ -46,6 +46,7 @@ public class EmpresaMB implements Serializable {
         arquivos = new ArrayList<>(ArquivoUtil.listar());
     }
 
+
     private String cnpj, user, img;
     private Integer idUser;
 
@@ -60,7 +61,7 @@ public class EmpresaMB implements Serializable {
         listaEmpresa = new ArrayList<Empresa>();
         listaUsuario = new ArrayList<Usuario>();
         listaUsuario = (List<Usuario>) dao.usuarioLogado2();
-        listaEmpresa = (List<Empresa>) dao.buscarTodos(Empresa.class);
+        listaEmpresa = (List<Empresa>) dao.buscarRestaurantePorOrdem2();
         System.out.println("===========" + listaUsuario.get(0).getUsuario());
         setUser(listaUsuario.get(0).getUsuario());
         setIdUser(listaUsuario.get(0).getIdUsuario());
@@ -112,7 +113,12 @@ public class EmpresaMB implements Serializable {
         empresa = (Empresa) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("empresa");
         setAlterar(true);
         setImg(empresa.getImagem());
-        
+
+    }
+
+    public void selecionarEmpresa() {
+        empresa = (Empresa) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("empresa");
+
     }
 
     public void excluir(ActionEvent evt) {
@@ -226,5 +232,4 @@ public class EmpresaMB implements Serializable {
     public void setAlterar(boolean alterar) {
         this.alterar = alterar;
     }
-
 }

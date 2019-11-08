@@ -24,11 +24,10 @@
                     padding-left: 6px;
                 }
             }
-            img {
-                max-width:200px;
-                max-height:150px;
-                width: auto;
-                height: auto;
+            .galeria{
+                width: 500px;
+                height: 313px;
+                display: none;
             }
         </style>
     </ui:define>
@@ -46,12 +45,12 @@
                                         rowsPerPageTemplate="6,12,16">
                                 <p:panel header="#{empresa.nomeRestaurante}" style="text-align:center">
                                     <h:panelGrid columns="1" style="width:100%">
-                                        <p:graphicImage name="ims/res/#{empresa.imagem}"/> 
+                                        <p:graphicImage  height="200" width="100%" name="ims/res/#{empresa.imagem}"/> 
                                         <h:outputText value="#{empresa.telefone}" />
                                         <h:outputText value="#{empresa.cidade} / #{empresa.estado}" />
 
                                         <p:commandLink oncomplete="PF('dialogReserva').show()" title="Reservar">
-                                            <h:outputText styleClass="fa fa-calendar" style="margin:0 auto;"/>                                       
+                                            <h:outputText styleClass="fa fa-calendar" style="margin:0 auto;"/>
                                         </p:commandLink>
                                     </h:panelGrid>
                                 </p:panel>
@@ -66,9 +65,9 @@
                                 <p:panel id="basicImagem" style="margin-bottom:10px; border: none">
                                     <div class="ui-fluid">
                                         <div class="card">
-                                            <h1>Churrasco na Brasa</h1>
-                                            <p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="337" showCaption="true" style="border: none">
-                                                <p:graphicImage name="resources/demo/images/nature/#{image}" title="#{image}"/>
+                                            <h1 id="teste">#{empresaMB.empresa.nomeRestaurante}</h1>
+                                            <p:galleria  value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+                                                <p:graphicImage name="demo/images/nature/#{image}"  title="#{image}"/>
                                             </p:galleria>
                                         </div>
                                     </div>
@@ -79,13 +78,13 @@
                                         <div class="card">
                                             <h1>Reserve sua mesa</h1>
                                             <p:tabView>
-                                                <p:tab title="I">
-                                                    <p:calendar locale="br" pattern="dd/MM/yyyy" id="inline" mode="inline" />                                                   
+                                                <p:tab>
+                                                    <p:calendar locale="br"  pattern="MM/dd/yyyy HH:mm"  id="inline" mode="inline" />                                                   
                                                 </p:tab>
-                                                <p:tab title="II">
+                                                <p:tab >
                                                     <p:calendar locale="br" pattern="dd/MM/yyyy" id="inline2" mode="inline" />
                                                 </p:tab>
-                                                <p:tab title="III">
+                                                <p:tab >
                                                     <p:calendar locale="br" pattern="dd/MM/yyyy" id="inline3" mode="inline" />
                                                 </p:tab>
                                             </p:tabView>

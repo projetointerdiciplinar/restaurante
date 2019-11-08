@@ -5,6 +5,10 @@
     <class>model.Marca</class>
     <class>model.Usuario</class>
     <class>model.Pessoa</class>
+    <class>model.Reserva</class>
+    <class>model.Empresa</class>
+    <class>model.Inventario</class>
+    <class>model.Cliente</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <validation-mode>NONE</validation-mode>
     <properties>
@@ -14,7 +18,6 @@
       <property name="javax.persistence.jdbc.password" value=""/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
 </persistence>
