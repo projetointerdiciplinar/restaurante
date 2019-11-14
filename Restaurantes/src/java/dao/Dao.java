@@ -9,8 +9,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import model.Empresa;
+import model.Horario;
 import model.Inventario;
 import model.Pessoa;
+import model.Reserva;
 import model.Usuario;
 
 public class Dao implements Serializable {
@@ -104,6 +106,7 @@ public class Dao implements Serializable {
     public List<Empresa> buscarRestaurantePorOrdem2() {
         return (List<Empresa>) em.createNativeQuery("SELECT * FROM empresa order by nome_restaurante", Empresa.class).getResultList();
     }
+
     public List<Empresa> buscarRestaurantePorOrdem() {
         return (List<Empresa>) em.createNativeQuery("SELECT * FROM empresa a WHERE a.id_usuario = (\n"
                 + "SELECT b.id_usuario FROM usuario b \n"
@@ -116,6 +119,13 @@ public class Dao implements Serializable {
                 + "where a.id_empresa = b.id_empresa \n"
                 + "and b.id_usuario = c.id_usuario\n"
                 + "and c.id_usuario =  " + getIdUser() + " order by a.DESCRICAO", Inventario.class).getResultList();
+    }
+
+    public List<Horario> buscarHorarioPorOrdem() {
+        return (List<Horario>) em.createNativeQuery("select a.*,b.*from horario a, empresa b, usuario c \n"
+                + "where a.id_empresa = b.id_empresa \n"
+                + "and b.id_usuario = c.id_usuario\n"
+                + "and c.id_usuario =  " + getIdUser(), Horario.class).getResultList();
     }
 
     //----------------PESSOA----------------
@@ -132,6 +142,15 @@ public class Dao implements Serializable {
                 + "and b.id_usuario = " + getIdUser() + ") order by a.nome_restaurante");
         List<Object[]> results = query.getResultList();
         return results;
+    }
+
+    //---------------- RESERVA ----------------
+    public List<Horario> buscarHorario() {
+        return (List<Horario>) em.createNativeQuery(" SELECT A.* FROM HORARIO A, EMPRESA B, USUARIO C\n"
+                + "WHERE A.id_empresa = B.id_empresa\n"
+                + "AND C.id_usuario = B.id_usuario\n"
+                + "AND C.id_usuario = 1\n", Horario.class).getResultList();
+
     }
 
     public Integer getIdUser() {

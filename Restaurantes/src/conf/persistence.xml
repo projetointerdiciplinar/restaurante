@@ -9,6 +9,7 @@
     <class>model.Empresa</class>
     <class>model.Inventario</class>
     <class>model.Cliente</class>
+    <class>model.Horario</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <validation-mode>NONE</validation-mode>
     <properties>

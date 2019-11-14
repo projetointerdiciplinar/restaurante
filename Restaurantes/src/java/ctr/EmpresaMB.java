@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -19,6 +21,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import model.Empresa;
 import model.Usuario;
+import static org.hibernate.annotations.common.util.impl.LoggerFactory.logger;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 import util.ArquivoUtil;
@@ -46,7 +49,6 @@ public class EmpresaMB implements Serializable {
         arquivos = new ArrayList<>(ArquivoUtil.listar());
     }
 
-
     private String cnpj, user, img;
     private Integer idUser;
 
@@ -66,6 +68,28 @@ public class EmpresaMB implements Serializable {
         setUser(listaUsuario.get(0).getUsuario());
         setIdUser(listaUsuario.get(0).getIdUsuario());
         setAlterar(false);
+    }
+
+    public Date getMinAge() {
+        Calendar currentDate = Calendar.getInstance();
+        currentDate.add(Calendar.DAY_OF_MONTH, +60);
+        //logger.info("Min Age: " + currentDate.get(Calendar.MONTH) + "/" + currentDate.get(Calendar.DATE) + "/" + currentDate.get(Calendar.YEAR));
+        System.out.println("min: " + currentDate.getTime());
+        return currentDate.getTime();
+    }
+
+    public Date getMaxAge() {
+        Calendar currentDate = Calendar.getInstance();
+        //logger.info("Max Age: " + currentDate.get(Calendar.MONTH) + "/" + currentDate.get(Calendar.DATE) + "/" + currentDate.get(Calendar.YEAR));
+        System.out.println("max: " + currentDate.getTime());
+        return currentDate.getTime();
+    }
+    public Date getMinHora() {
+        Calendar currentDate = Calendar.getInstance();
+        currentDate.add(Calendar.HOUR_OF_DAY, -1);
+        //logger.info("Min Age: " + currentDate.get(Calendar.MONTH) + "/" + currentDate.get(Calendar.DATE) + "/" + currentDate.get(Calendar.YEAR));
+        System.out.println("min: " + currentDate.getTime());
+        return currentDate.getTime();
     }
 
     public void upload() {

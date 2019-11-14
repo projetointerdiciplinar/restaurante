@@ -53,6 +53,7 @@ public class InventarioMB implements Serializable {
 
     public void gravar(ActionEvent evt) {
         try {
+            inventario.toUpperCase();
             dao.gravar(inventario);
             FacesUtil.addInfoMessage("Informação", "Salvo com sucesso!");
             novo();

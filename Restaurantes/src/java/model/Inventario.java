@@ -24,9 +24,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "inventario")
 public class Inventario implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "inventario", unique = true, nullable = false)
+    @Column(name = "id_inventario", unique = true, nullable = false)
     private Integer inventario;
     @Column(name = "descricao", nullable = false)
     private String descricao;
@@ -37,6 +38,10 @@ public class Inventario implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_empresa", nullable = false, foreignKey = @ForeignKey(name = "id_inventario_empresa"))
     private Empresa empresa;
+
+    public void toUpperCase() {
+        this.setDescricao(this.getDescricao().toUpperCase());
+    }
 
     public Integer getInventario() {
         return inventario;
@@ -77,7 +82,5 @@ public class Inventario implements Serializable {
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
-    
-    
-    
+
 }

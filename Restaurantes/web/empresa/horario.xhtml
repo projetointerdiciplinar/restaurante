@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
-    <ui:define name="title-tab">Cadastro do Inventario</ui:define>
+    <ui:define name="title-tab">Cadastro de Horario</ui:define>
     <ui:define name="head">
         <style type="text/css">
             .ui-panelgrid.form-elements .ui-grc-2 {
@@ -30,25 +30,29 @@
         <div class="ui-fluid">
             <div class="ui-g">
                 <div class="ui-g-12">  
-                    <h:form id="formCliente"  enctype="multipart/form-data">
+                    <h:form id="formHorario"  enctype="multipart/form-data">
                         <p:growl id="menssagem" showDetail="true" sticky="false" />
                         <div class="card card-w-title">
-                            <h1>Cadastro do Inventario</h1>
+                            <h1>Cadastro de Horario</h1>
 
                             <p:panelGrid columns="4" layout="grid"
-                                         columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-1,ui-g-12 ui-md-3"                                  
+                                         columnClasses="ui-g-12 ui-md-2, ui-g-12 ui-md-3, ui-g-12 ui-md-2, ui-g-12 ui-md-3"                                  
                                          styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">
-                                <p:outputLabel  value="Descrição" indicateRequired="false" /> 
-                                <p:inputText id="descricao" value="#{inventarioMB.inventario.descricao}" required="true" requiredMessage="Descrição obrigatório!"   />   
-
-                                <p:outputLabel for="quantidade" value="Quantidade: " indicateRequired="false" />
-                                <p:inputNumber id="quantidade" value="#{inventarioMB.inventario.qtde}" decimalPlaces="0" decimalSeparator="," thousandSeparator="." required="true" requiredMessage="Quantidade obrigatório!" />
-                                <p:outputLabel for="valor" value="Valor Unitario: " indicateRequired="false" />
-                                <p:inputNumber   id="valor" value="#{inventarioMB.inventario.valorUnitario}" decimalPlaces="2" decimalSeparator="," thousandSeparator="." required="true" requiredMessage="Valor Unitario obrigatório!" />  
-                                <p:outputLabel for="empresa" value="Estabelicimento: " indicateRequired="false"  />
-                                <p:selectOneMenu id="empresa" value="#{inventarioMB.inventario.empresa.idEmpresa}" required="true" requiredMessage="Estabelicimento: obrigatório!" >
-                                    <f:selectItems value="#{inventarioMB.selectEmpresa}"/>
-                                </p:selectOneMenu>  
+                                <p:outputLabel for="empresa" value="Estabelicimento: " indicateRequired="false" />
+                                <p:selectOneMenu id="empresa" value="#{horarioMB.horario.empresa.idEmpresa}" required="true" requiredMessage="Nome do Restaurante obrigatório!" >
+                                    <f:selectItems value="#{horarioMB.selectEmpresa}"/>
+                                </p:selectOneMenu> 
+                                <p:outputLabel  value="Descrição" indicateRequired="false"  /> 
+                                <p:selectOneMenu id="idConsole" value="#{horarioMB.horario.descricao}">
+                                    <f:selectItem itemLabel="CAFE DA MANHA" itemValue="CAFE DA MANHA" />
+                                    <f:selectItem itemLabel="ALMOÇO" itemValue="ALMOÇO" />
+                                    <f:selectItem itemLabel="JANTAR" itemValue="JANTAR" />
+                                </p:selectOneMenu>   
+                                <p:outputLabel for="time" value="Horario Inicio:  " indicateRequired="false" />
+                                <p:calendar id="time" value="#{horarioMB.horarioInic}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Horario obrigatório!" />
+                                <p:outputLabel for="time2" value="Horario Fim:  " indicateRequired="false" />
+                                <p:calendar id="time2" value="#{horarioMB.horarioFim}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Horario obrigatório!" />
+                                 
 
                                 <p:spacer height="20px" />
                             </p:panelGrid>
@@ -56,7 +60,7 @@
                             <p:panelGrid columns="4" layout="grid"
                                          columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-6"
                                          styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">
-                                <p:commandButton value="Salvar" actionListener="#{inventarioMB.gravar}" update="formCliente,formCliente2"
+                                <p:commandButton value="Salvar" actionListener="#{horarioMB.gravar}" update="formHorario,formHorario2"
                                                  icon="fa fa-check"/>
                                 <p:commandButton  onclick="history.go(0); return false;" value="Cancelar"
                                                   icon="fa fa-close"/>                                  
@@ -69,30 +73,30 @@
 
 
                     </h:form>
-                    <h:form id="formCliente2">
+                    <h:form id="formHorario2">
                         <div class="card card-w-title">
-                            <p:dataTable id="tabela" value="#{inventarioMB.listaInventario}" var="inventario" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            <p:dataTable id="tabela" value="#{horarioMB.listaHorario}" var="hor" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                          rowsPerPageTemplate="10,20,30,50" emptyMessage="Nenhuma informação..." reflow="true"  >
-                                <p:column headerText="Estabelecimento " width="20">
-                                    <h:outputText value="#{inventario.empresa.nomeRestaurante}"/>
+                                <p:column headerText="Estabelecimento " width="20" sortBy="#{hor.empresa.nomeRestaurante}">
+                                    <h:outputText value="#{hor.empresa.nomeRestaurante}"/>
                                 </p:column>
-                                <p:column headerText="Descrição" width="10" sortBy="#{inventario.descricao}">
-                                    <h:outputText value="#{inventario.descricao}"/>
+                                <p:column headerText="Descrição" width="10" sortBy="#{hor.descricao}">
+                                    <h:outputText value="#{hor.descricao}"/>
                                 </p:column>
-                                <p:column headerText="Quantidade" width="5" sortBy="#{inventario.qtde}">
-                                    <h:outputText value="#{inventario.qtde}"/>
+                                <p:column headerText="Horario Inicio" width="5" sortBy="#{hor.horarioInicio}">
+                                    <h:outputText value="#{hor.horarioInicio}"/>
+                                </p:column>    
+                                <p:column headerText="Horario Fim" width="5" sortBy="#{hor.horarioFim}">
+                                    <h:outputText value="#{hor.horarioFim}"/>
                                 </p:column> 
-                                <p:column headerText="Valor" width="5" sortBy="#{inventario.valorUnitario}">
-                                    <h:outputText value="#{inventario.valorUnitario}"/>
-                                </p:column>                    
 
                                 <p:column style="text-align: center; width:1%"> 
-                                    <p:commandLink title="Editar" id="alterar" actionListener="#{inventarioMB.alterar}" update="formCliente,formCliente2" process="@this" >
+                                    <p:commandLink title="Editar" id="alterar" actionListener="#{horarioMB.alterar}" update="formHorario,formHorario2" >
                                         <i class="fa fa-pencil-square-o"></i>
                                     </p:commandLink>
                                 </p:column>
                                 <p:column style="text-align: center; width:1%"> 
-                                    <p:commandLink title="Excluir" id="excluir" actionListener="#{inventarioMB.excluir}" update="formCliente,formCliente2"  >
+                                    <p:commandLink title="Excluir" id="excluir" actionListener="#{horarioMB.excluir}" update="formHorario,formHorario2" >
                                         <i class="fa fa-trash"></i>
                                          <p:confirm header="Confirmação" message="Você tem certeza ?" icon="ui-icon-alert" />
                                     </p:commandLink>

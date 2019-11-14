@@ -15,8 +15,9 @@
                             <p:menuitem style="visibility: hidden; position: absolute" id="pm_dashboard" value="Dashboard" icon="fa fa-home" outcome="/sistema/dashboard" />
                             <p:submenu style="#{(usuarioMB.perfil=='CLIENTE')?'visibility: hidden; position: absolute':''}" id="pm_cadastros" label="Cadastro" icon="fa fa-pencil-square-o ">
                                 <p:menuitem style="#{(usuarioMB.perfil=='CLIENTE')?'visibility: hidden; position: absolute':(usuarioMB.perfil=='EMPRESA')?'visibility: hidden; position: absolute':''}" id="pm_donoEmpresa" value="Empresário" icon="fa fa-user-secret" outcome="/sistema/empresario" />
-                                <p:menuitem id="pm_empresa" value="Empresa" icon="fa fa-suitcase" outcome="/empresa/cadastroEmpresa" />
-                                <p:menuitem id="pm_inventario" value="Inventario" icon="fa fa-suitcase" outcome="/empresa/inventario" />
+                                <p:menuitem id="em_empresa" value="Empresa" icon="fa fa-suitcase" outcome="/empresa/cadastroEmpresa" />
+                                <p:menuitem id="em_inventario" value="Inventario" icon="fa fa-list" outcome="/empresa/inventario" />
+                                <p:menuitem id="em_horario" value="Horario" icon="fa fa-clock-o" outcome="/empresa/horario" />
                             </p:submenu> 
                             
                             <p:submenu style="visibility: hidden; position: absolute" id="pm_pedidos" label="Pedidos" icon="fa fa-cutlery">
