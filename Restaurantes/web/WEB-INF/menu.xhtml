@@ -17,15 +17,16 @@
                                 <p:menuitem style="#{(usuarioMB.perfil=='CLIENTE')?'visibility: hidden; position: absolute':(usuarioMB.perfil=='EMPRESA')?'visibility: hidden; position: absolute':''}" id="pm_donoEmpresa" value="Empresário" icon="fa fa-user-secret" outcome="/sistema/empresario" />
                                 <p:menuitem id="em_empresa" value="Empresa" icon="fa fa-suitcase" outcome="/empresa/cadastroEmpresa" />
                                 <p:menuitem id="em_inventario" value="Inventario" icon="fa fa-list" outcome="/empresa/inventario" />
-                                <p:menuitem id="em_horario" value="Horario" icon="fa fa-clock-o" outcome="/empresa/horario" />
                             </p:submenu> 
-                            
+                            <p:menuitem style="#{(usuarioMB.perfil=='CLIENTE')?'visibility: hidden; position: absolute':''}" id="pm_pedidosEmpresa" value="Pedidos" icon="fa fa-history" outcome="/empresa/pedidos" />
+                               
                             <p:submenu style="visibility: hidden; position: absolute" id="pm_pedidos" label="Pedidos" icon="fa fa-cutlery">
                                 <p:menuitem id="pm_aberto" value="Em Aberto" icon="fa fa-file-text" outcome="/empresa/index" />
                             </p:submenu>  
                             
                             <p:submenu style="#{(usuarioMB.perfil=='EMPRESA')?'visibility: hidden; position: absolute':''}" id="pm_areaCliente" label="Area do Cliente" icon="fa fa-user">
                                 <p:menuitem id="pm_reserva" value="Fazer Reserva" icon="fa fa-check-square" outcome="/areaDoCliente/index" />
+                                <p:menuitem id="reserva" value="Historico" icon="fa fa-history" outcome="/areaDoCliente/reservas" />
                             </p:submenu>  
                             <p:submenu style="#{(usuarioMB.perfil=='CLIENTE')?'visibility: hidden; position: absolute':(usuarioMB.perfil=='EMPRESA')?'visibility: hidden; position: absolute':''}" id="pm_relatorio" label="Relatorios" icon="fa fa-pencil-square-o">
                                 <p:menuitem id="pm_todosClientes" value="Todos Clientes" icon="fa fa-users" outcome="/sistema/todosCliente" />

@@ -50,6 +50,9 @@ public class Reserva implements Serializable{
     
     @Transient
     private String dt;
+    @Transient
+    private String nome, telefone, email, nomeRestaurante;
+    
 
     public String getStatus() {
         return status;
@@ -115,6 +118,38 @@ public class Reserva implements Serializable{
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNomeRestaurante() {
+        return nomeRestaurante;
+    }
+
+    public void setNomeRestaurante(String nomeRestaurante) {
+        this.nomeRestaurante = nomeRestaurante;
     }
     
     

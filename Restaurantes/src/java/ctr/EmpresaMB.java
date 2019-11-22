@@ -63,34 +63,16 @@ public class EmpresaMB implements Serializable {
         listaEmpresa = new ArrayList<Empresa>();
         listaUsuario = new ArrayList<Usuario>();
         listaUsuario = (List<Usuario>) dao.usuarioLogado2();
-        listaEmpresa = (List<Empresa>) dao.buscarRestaurantePorOrdem2();
+        listaEmpresa = (List<Empresa>) dao.buscarRestaurantePorOrdem();
         System.out.println("===========" + listaUsuario.get(0).getUsuario());
         setUser(listaUsuario.get(0).getUsuario());
         setIdUser(listaUsuario.get(0).getIdUsuario());
         setAlterar(false);
     }
 
-    public Date getMinAge() {
-        Calendar currentDate = Calendar.getInstance();
-        currentDate.add(Calendar.DAY_OF_MONTH, +60);
-        //logger.info("Min Age: " + currentDate.get(Calendar.MONTH) + "/" + currentDate.get(Calendar.DATE) + "/" + currentDate.get(Calendar.YEAR));
-        System.out.println("min: " + currentDate.getTime());
-        return currentDate.getTime();
-    }
+    
 
-    public Date getMaxAge() {
-        Calendar currentDate = Calendar.getInstance();
-        //logger.info("Max Age: " + currentDate.get(Calendar.MONTH) + "/" + currentDate.get(Calendar.DATE) + "/" + currentDate.get(Calendar.YEAR));
-        System.out.println("max: " + currentDate.getTime());
-        return currentDate.getTime();
-    }
-    public Date getMinHora() {
-        Calendar currentDate = Calendar.getInstance();
-        currentDate.add(Calendar.HOUR_OF_DAY, -1);
-        //logger.info("Min Age: " + currentDate.get(Calendar.MONTH) + "/" + currentDate.get(Calendar.DATE) + "/" + currentDate.get(Calendar.YEAR));
-        System.out.println("min: " + currentDate.getTime());
-        return currentDate.getTime();
-    }
+    
 
     public void upload() {
         try {

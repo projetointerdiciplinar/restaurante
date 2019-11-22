@@ -34,14 +34,16 @@
                         <p:growl id="menssagem" showDetail="true" sticky="false" />
                         <div class="card card-w-title">
                             <h1>Cadastro da Empresa</h1>
-                            <p:panelGrid columns="3" layout="grid"
-                                         columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-7,ui-g-12 ui-md-4"                                  
+                            <p:panelGrid columns="4" layout="grid"
+                                         columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-7,ui-g-12 ui-md-1,ui-g-12 ui-md-3"                                  
                                          styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">                                                            
                                 <p:outputLabel value="Nome Restaurante: " for="idFantasia" indicateRequired="false"/>
                                 <p:inputText id="idFantasia" value = "#{empresaMB.empresa.nomeRestaurante}" required="true" requiredMessage="Nome do Restaurante obrigatório!"/>                                                
-                                </p:panelGrid>
-                                
-                                <p:panelGrid columns="6" layout="grid"
+                                <p:outputLabel value="QtdePessoas " indicateRequired="false"/>
+                                <p:inputNumber  value = "#{empresaMB.empresa.qtdePessoas}"  decimalPlaces="0" decimalSeparator="," thousandSeparator="."  required="true" requiredMessage="Quantidade de pessoas obrigatório!"/>          
+                            </p:panelGrid>
+
+                            <p:panelGrid columns="6" layout="grid"
                                          columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-3,ui-g-12 ui-md-1,ui-g-12 ui-md-3,ui-g-12 ui-md-1,ui-g-12 ui-md-3"                                  
                                          styleClass="ui-panelgrid-blank form-group" style="border:0px none; background-color:transparent;">
                                 <p:outputLabel id="idCnpj" value="CNPJ:" /> 
@@ -91,13 +93,13 @@
                                 </p:selectOneMenu>                                
                                 <p:outputLabel for="idTel" value="Telefone:"/>
                                 <p:inputMask id="idTel" value = "#{empresaMB.empresa.telefone}" mask="(99)9999-9999"></p:inputMask>
-                              
+
                                 <p:outputLabel value="Imagem: " style="visibility: hidden" for="fileUpload" />
-           
+
 
                                 <p:fileUpload disabled="#{(empresaMB.alterar)?true:false}" value="#{empresaMB.uploadedFile}"
-                                                  id="fileUpload" mode="simple" skinSimple="true" />                                   
-                             
+                                              id="fileUpload" mode="simple" skinSimple="true" />                                   
+
 
                                 <p:spacer height="20px" />
                             </p:panelGrid>

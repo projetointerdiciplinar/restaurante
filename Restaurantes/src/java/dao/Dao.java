@@ -153,6 +153,39 @@ public class Dao implements Serializable {
 
     }
 
+    public List<Reserva> reservaCliente() {
+        return (List<Reserva>) em.createNativeQuery("SELECT * \n"
+                + "FROM RESERVA A, EMPRESA B, USUARIO C\n"
+                + "WHERE A.id_empresa = B.id_empresa\n"
+                + "AND A.id_usuario = C.id_usuario\n"
+                + "AND C.id_usuario = " + getIdUser(), Reserva.class).getResultList();
+
+    }
+
+    public List<Object[]> qtdePessoa(int empresa) {
+        TypedQuery<Object[]> query = (TypedQuery<Object[]>) em.createNativeQuery("SELECT B.qtde_pessoas, A.qtde_pessoa QTDE \n"
+                + "FROM RESERVA A, EMPRESA B, USUARIO C \n"
+                + "WHERE A.id_empresa = B.id_empresa\n"
+                + "AND A.id_usuario = C.id_usuario\n"
+                + "AND B.id_empresa = " + empresa + "\n"
+                + "AND C.id_usuario = " + getIdUser());
+        List<Object[]> results = query.getResultList();
+        return results;
+    }
+
+    public List<Object[]> reservaClienteEmpresa() {
+        TypedQuery<Object[]> query = (TypedQuery<Object[]>) em.createNativeQuery("SELECT PCL.nome, PCL.telefone, PCL.email, B.nome_restaurante, A.data, A.hora, A.qtde_pessoa, A.status, A.ID, a.id_empresa, a.id_usuario  \n"
+                + "FROM RESERVA A, EMPRESA B, USUARIO UEM, PESSOA PEM, USUARIO UCL, PESSOA PCL\n"
+                + "WHERE A.id_empresa = B.id_empresa\n"
+                + "AND B.id_usuario = UEM.id_usuario\n"
+                + "AND UEM.id_usuario = PEM.id_usuario\n"
+                + "AND A.id_usuario = UCL.id_usuario\n"
+                + "AND UCL.id_usuario = PCL.id_usuario\n"
+                + "AND UEM.id_usuario =  " + getIdUser());
+        List<Object[]> results = query.getResultList();
+        return results;
+    }
+
     public Integer getIdUser() {
         return idUser;
     }

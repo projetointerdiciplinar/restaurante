@@ -7,16 +7,20 @@ package ctr;
 
 import dao.Dao;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
+import javax.faces.event.ActionEvent;
 import model.Empresa;
 import model.Horario;
-import model.Inventario;
 import model.Reserva;
+import model.Usuario;
+import util.FacesUtil;
 
 /**
  *
@@ -29,19 +33,17 @@ public class ReservaMB implements Serializable {
     private Dao dao;
     private Reserva reserva;
     private Empresa empresa;
+    private Usuario usuario;
     private Horario horario;
-    private boolean cafe, almoco, jantar, selecionouCafe, SelecionouAlmoco, selecionouJantar;
+    //private boolean cafe, almoco, jantar, selecionouCafe, SelecionouAlmoco, selecionouJantar;
+    private String horario1, horario2;
+    private boolean bloqHorario;
+    private int idEmpresa, totPessoaDis;
 
     private List<Empresa> listaEmpresa = new ArrayList<Empresa>();
     private List<Reserva> listaReserva = new ArrayList<Reserva>();
-    private List<Horario> listaHorario = new ArrayList<Horario>();
-    private List<Horario> listaCafe = new ArrayList<Horario>();
-    private List<Horario> listaAlmoco = new ArrayList<Horario>();
-    private List<Horario> listaJantar = new ArrayList<Horario>();
-    private List lista;
-    private List<SelectItem> selectCafe;
-    private List<SelectItem> selectAlmoco;
-    private List<SelectItem> selectJantar;
+    private List<Reserva> listaReservaCliente = new ArrayList<Reserva>();
+    private List<Reserva> listaReservaClienteEmpresa = new ArrayList<Reserva>();
 
     public ReservaMB() {
         dao = (Dao) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("dao");
@@ -52,54 +54,212 @@ public class ReservaMB implements Serializable {
         reserva = new Reserva();
         horario = new Horario();
         empresa = new Empresa();
+        usuario = new Usuario();
         listaReserva = new ArrayList<Reserva>();
         listaEmpresa = new ArrayList<Empresa>();
-        horarios();
+        listaEmpresa = (List<Empresa>) dao.buscarRestaurantePorOrdem2();
+        //horarios();
+        reservaCliente();
+        reservaClienteEmpresa();
+
     }
 
-    public List<SelectItem> getSelectCafe() {
-        selectCafe = new ArrayList<SelectItem>();
-        listaEmpresa = new ArrayList<Empresa>();
-        listaEmpresa = (List<Empresa>) dao.buscarRestaurantePorOrdem();
-        selectCafe.add(new SelectItem(0, "Selecione"));
-        for (Empresa c : listaEmpresa) {
-            selectCafe.add(new SelectItem(c.getIdEmpresa(), c.getNomeRestaurante()));
+    public void bloquearHorario() {
+        Date data = new Date();
+        SimpleDateFormat hora = new SimpleDateFormat("hh24");
+        int h = Integer.parseInt(hora.format(data));
+        System.out.println("hora: " + h);
+        if (h > 15) {
+            setBloqHorario(true);
         }
 
-        return selectCafe;
     }
 
-    public void horarios() {
-        listaHorario = new ArrayList<Horario>();
-        listaHorario = (List<Horario>) dao.buscarHorario();
-        double iniCafe = 0, fimCafe = 0, iniAlmoco = 0, fimAlmoco = 0, iniJantar = 0, fimJantar = 0;
-        for (Horario c : listaHorario) {
-            if (c.getDescricao().equals("CAFE DA MANHA")) {
-                iniCafe = Double.parseDouble(c.getHorarioInicio().replaceAll(":", "."));
-                fimCafe = Double.parseDouble(c.getHorarioFim().replaceAll(":", "."));
+    public Date getMaxAge() {
+        Calendar currentDate = Calendar.getInstance();
+        //logger.info("Max Age: " + currentDate.get(Calendar.MONTH) + "/" + currentDate.get(Calendar.DATE) + "/" + currentDate.get(Calendar.YEAR));
+        //System.out.println("max: " + currentDate.getTime());
+        return currentDate.getTime();
+    }
 
-            } else if (c.getDescricao().equals("ALMOÇO")) {
-                iniAlmoco = Double.parseDouble(c.getHorarioInicio().replaceAll(":", "."));
-                fimAlmoco = Double.parseDouble(c.getHorarioFim().replaceAll(":", "."));
+    public Date getMinHora() {
+        Calendar currentDate = Calendar.getInstance();
+        currentDate.add(Calendar.HOUR_OF_DAY, -2);
+        //logger.info("Min Age: " + currentDate.get(Calendar.MONTH) + "/" + currentDate.get(Calendar.DATE) + "/" + currentDate.get(Calendar.YEAR));
+        //System.out.println("min: " + currentDate.getTime());
+        return currentDate.getTime();
+    }
 
-            } else if (c.getDescricao().equals("JANTAR")) {
-                iniJantar = Double.parseDouble(c.getHorarioInicio().replaceAll(":", "."));
-                fimJantar = Double.parseDouble(c.getHorarioFim().replaceAll(":", "."));
+    public Date getMinAge() {
+        Calendar currentDate = Calendar.getInstance();
+        currentDate.add(Calendar.DAY_OF_MONTH, +60);
+        //logger.info("Min Age: " + currentDate.get(Calendar.MONTH) + "/" + currentDate.get(Calendar.DATE) + "/" + currentDate.get(Calendar.YEAR));
+        //System.out.println("min: " + currentDate.getTime());
+        return currentDate.getTime();
+    }
+
+    public void selecionarRestaurante() {
+        empresa = (Empresa) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("empresa");
+        qtdePessoa();
+        bloquearHorario();
+    }
+
+    public void qtdePessoa() {
+        List<Object[]> results = dao.qtdePessoa(empresa.getIdEmpresa());
+        System.out.println("lista: " + results.size());
+        if (results.size() == 0) {
+            setTotPessoaDis(empresa.getQtdePessoas());
+        } else {
+            int total = 0, qtdeReservado = 0;
+            for (Object[] result : results) {
+                total = (int) result[0];
+                qtdeReservado = (int) result[1];
             }
-        }
-        for (double i = iniCafe; i <= fimCafe; i++) {
-
+            setTotPessoaDis(total - qtdeReservado);
         }
     }
 
-    public List<SelectItem> getSelectAlmoco() {
-        return selectAlmoco;
+    public void gravar(ActionEvent evt) {
+        try {
+            System.out.println("empresa: " + empresa.getIdEmpresa());
+            System.out.println("usuario: " + dao.getIdUser());
+            if (reserva.getData() == null) {
+                Date data = new Date();
+                reserva.setData(data);
+                System.out.println("data: " + reserva.getData());
+            } else {
+                System.out.println("data: " + reserva.getData());
+            }
+            reserva.setEmpresa(empresa);
+            System.out.println("horario: " + getHorario2());
+            if (isBloqHorario()) {
+                setHorario1("1");
+            }
+            if (getHorario1().equals("1") && getHorario2().equals("1")) {
+                FacesUtil.addWarnMessage("Informação", "Escolha um horario!");
+            } else {
+                if (getHorario1().equals("1") && !getHorario2().equals("1")) {
+                    reserva.setHora(getHorario2());
+                } else if (!getHorario1().equals("1") && getHorario2().equals("1")) {
+                    reserva.setHora(getHorario1());
+                } else {
+                    reserva.setHora(getHorario1() + " - " + getHorario2());
+                }
+                reserva.setStatus("PENDENTE");
+                usuario.setIdUsuario(dao.getIdUser());
+                reserva.setUsuario(usuario);
+                dao.gravar(reserva);
+                FacesUtil.addInfoMessage("Informação", "Salvo com sucesso!");
+                novo();
+            }
+        } catch (Exception ex) {
+            FacesUtil.addErrorMessage("Erro", "Entre em contato com suporte!");
+            ex.printStackTrace();
+        }
     }
 
-    public List<SelectItem> getSelectJantar() {
-        return selectJantar;
+    // LISTA HISTORICO RESEVA CLIENTE
+    public void reservaCliente() {
+        listaReservaCliente = new ArrayList<Reserva>();
+        listaReservaCliente = (List<Reserva>) dao.reservaCliente();
     }
 
+    public void reservaClienteEmpresa() {
+        listaReservaClienteEmpresa = new ArrayList<Reserva>();
+        List<Object[]> results = dao.reservaClienteEmpresa();
+
+        Reserva r;
+        Empresa e;
+        Usuario u;
+        for (Object[] result : results) {
+            r = new Reserva();
+            e = new Empresa();
+            u = new Usuario();
+            r.setNome((String) result[0]);
+            r.setTelefone((String) result[1]);
+            r.setEmail((String) result[2]);
+            r.setNomeRestaurante((String) result[3]);
+            r.setData((Date) result[4]);
+            r.setHora((String) result[5]);
+            r.setQtde((Integer) result[6]);
+            r.setStatus((String) result[7]);
+            r.setId((Integer) result[8]);
+            e.setIdEmpresa((Integer) result[9]);
+            u.setIdUsuario((Integer) result[10]);
+            r.setEmpresa(e);
+            r.setUsuario(u);
+            listaReservaClienteEmpresa.add(r);
+        }
+    }
+
+    public void cancelar() {
+        reserva = (Reserva) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("reserva");
+        //System.out.println("id: " + reserva.getId());
+        try {
+            reserva.setStatus("CANCELADO");
+            dao.alterar(reserva);
+            novo();
+            FacesUtil.addInfoMessage("Informação", "Cancelado com sucesso!");
+            //System.out.println(reserva.getStatus());
+        } catch (Exception ex) {
+            FacesUtil.addErrorMessage("Erro", "Entre em contato com suporte!");
+            ex.printStackTrace();
+        }
+        //System.out.println(reserva.getStatus());
+    }
+
+    public void confirmar() {
+        reserva = (Reserva) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("reserva");
+        //System.out.println("id: " + reserva.getId());
+
+        try {
+            reserva.setStatus("CONFIRMADO");
+            dao.alterar(reserva);
+            novo();
+            FacesUtil.addInfoMessage("Informação", "Confirmado com sucesso!");
+            //System.out.println(reserva.getStatus());
+        } catch (Exception ex) {
+            FacesUtil.addErrorMessage("Erro", "Entre em contato com suporte!");
+            ex.printStackTrace();
+        }
+
+    }
+
+    // LISTA HISTORICO RESEVA EMPRESA
+//    public List<SelectItem> getSelectCafe() {
+//        selectCafe = new ArrayList<SelectItem>();
+//        listaEmpresa = new ArrayList<Empresa>();
+//        listaEmpresa = (List<Empresa>) dao.buscarRestaurantePorOrdem();
+//        selectCafe.add(new SelectItem(0, "Selecione"));
+//        for (Empresa c : listaEmpresa) {
+//            selectCafe.add(new SelectItem(c.getIdEmpresa(), c.getNomeRestaurante()));
+//        }
+//
+//        return selectCafe;
+//    }
+//
+//    public void horarios() {
+//        listaHorario = new ArrayList<Horario>();
+//        listaHorario = (List<Horario>) dao.buscarHorario();
+//        double iniCafe = 0, fimCafe = 0, iniAlmoco = 0, fimAlmoco = 0, iniJantar = 0, fimJantar = 0;
+//        for (Horario c : listaHorario) {
+//            if (c.getDescricao().equals("CAFE DA MANHA")) {
+//                iniCafe = Double.parseDouble(c.getHorarioInicio().replaceAll(":", "."));
+//                fimCafe = Double.parseDouble(c.getHorarioFim().replaceAll(":", "."));
+//
+//            } else if (c.getDescricao().equals("ALMOÇO")) {
+//                iniAlmoco = Double.parseDouble(c.getHorarioInicio().replaceAll(":", "."));
+//                fimAlmoco = Double.parseDouble(c.getHorarioFim().replaceAll(":", "."));
+//
+//            } else if (c.getDescricao().equals("JANTAR")) {
+//                iniJantar = Double.parseDouble(c.getHorarioInicio().replaceAll(":", "."));
+//                fimJantar = Double.parseDouble(c.getHorarioFim().replaceAll(":", "."));
+//            }
+//        }
+//        for (double i = iniCafe; i <= fimCafe; i++) {
+//
+//        }
+//    }
     public Dao getDao() {
         return dao;
     }
@@ -140,54 +300,6 @@ public class ReservaMB implements Serializable {
         this.listaReserva = listaReserva;
     }
 
-    public boolean isCafe() {
-        return cafe;
-    }
-
-    public void setCafe(boolean cafe) {
-        this.cafe = cafe;
-    }
-
-    public boolean isAlmoco() {
-        return almoco;
-    }
-
-    public void setAlmoco(boolean almoco) {
-        this.almoco = almoco;
-    }
-
-    public boolean isJantar() {
-        return jantar;
-    }
-
-    public void setJantar(boolean jantar) {
-        this.jantar = jantar;
-    }
-
-    public boolean isSelecionouCafe() {
-        return selecionouCafe;
-    }
-
-    public void setSelecionouCafe(boolean selecionouCafe) {
-        this.selecionouCafe = selecionouCafe;
-    }
-
-    public boolean isSelecionouAlmoco() {
-        return SelecionouAlmoco;
-    }
-
-    public void setSelecionouAlmoco(boolean SelecionouAlmoco) {
-        this.SelecionouAlmoco = SelecionouAlmoco;
-    }
-
-    public boolean isSelecionouJantar() {
-        return selecionouJantar;
-    }
-
-    public void setSelecionouJantar(boolean selecionouJantar) {
-        this.selecionouJantar = selecionouJantar;
-    }
-
     public Horario getHorario() {
         return horario;
     }
@@ -196,44 +308,68 @@ public class ReservaMB implements Serializable {
         this.horario = horario;
     }
 
-    public List<Horario> getListaHorario() {
-        return listaHorario;
+    public String getHorario1() {
+        return horario1;
     }
 
-    public void setListaHorario(List<Horario> listaHorario) {
-        this.listaHorario = listaHorario;
+    public void setHorario1(String horario1) {
+        this.horario1 = horario1;
     }
 
-    public List<Horario> getListaCafe() {
-        return listaCafe;
+    public String getHorario2() {
+        return horario2;
     }
 
-    public void setListaCafe(List<Horario> listaCafe) {
-        this.listaCafe = listaCafe;
+    public void setHorario2(String horario2) {
+        this.horario2 = horario2;
     }
 
-    public List<Horario> getListaAlmoco() {
-        return listaAlmoco;
+    public boolean isBloqHorario() {
+        return bloqHorario;
     }
 
-    public void setListaAlmoco(List<Horario> listaAlmoco) {
-        this.listaAlmoco = listaAlmoco;
+    public void setBloqHorario(boolean bloqHorario) {
+        this.bloqHorario = bloqHorario;
     }
 
-    public List<Horario> getListaJantar() {
-        return listaJantar;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setListaJantar(List<Horario> listaJantar) {
-        this.listaJantar = listaJantar;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public List getLista() {
-        return lista;
+    public int getIdEmpresa() {
+        return idEmpresa;
     }
 
-    public void setLista(List lista) {
-        this.lista = lista;
+    public void setIdEmpresa(int idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
+    public int getTotPessoaDis() {
+        return totPessoaDis;
+    }
+
+    public void setTotPessoaDis(int totPessoaDis) {
+        this.totPessoaDis = totPessoaDis;
+    }
+
+    public List<Reserva> getListaReservaCliente() {
+        return listaReservaCliente;
+    }
+
+    public void setListaReservaCliente(List<Reserva> listaReservaCliente) {
+        this.listaReservaCliente = listaReservaCliente;
+    }
+
+    public List<Reserva> getListaReservaClienteEmpresa() {
+        return listaReservaClienteEmpresa;
+    }
+
+    public void setListaReservaClienteEmpresa(List<Reserva> listaReservaClienteEmpresa) {
+        this.listaReservaClienteEmpresa = listaReservaClienteEmpresa;
     }
 
 }

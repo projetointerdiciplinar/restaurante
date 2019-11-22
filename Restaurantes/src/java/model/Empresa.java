@@ -32,6 +32,8 @@ public class Empresa implements Serializable {
     private String endereco;
     @Column(name = "numero", nullable = false)
     private Integer numero;
+    @Column(name = "qtde_pessoas", nullable = false)
+    private Integer qtdePessoas;
     @Column(name = "bairro", nullable = false)
     private String bairro;
     @Column(name = "cep", nullable = false)
@@ -50,6 +52,15 @@ public class Empresa implements Serializable {
     private String cnpj;
     @Column(name = "imagem", nullable = false)
     private String imagem;
+
+    public Integer getQtdePessoas() {
+        return qtdePessoas;
+    }
+
+    public void setQtdePessoas(Integer qtdePessoas) {
+        this.qtdePessoas = qtdePessoas;
+    }
+
     
     public Integer getIdEmpresa() {
         return idEmpresa;
