@@ -18,7 +18,7 @@
                                 <p:menuitem id="em_empresa" value="Empresa" icon="fa fa-suitcase" outcome="/empresa/cadastroEmpresa" />
                                 <p:menuitem id="em_inventario" value="Inventario" icon="fa fa-list" outcome="/empresa/inventario" />
                             </p:submenu> 
-                            <p:menuitem style="#{(usuarioMB.perfil=='CLIENTE')?'visibility: hidden; position: absolute':''}" id="pm_pedidosEmpresa" value="Pedidos" icon="fa fa-history" outcome="/empresa/pedidos" />
+                            <p:menuitem style="#{(usuarioMB.perfil=='CLIENTE')?'visibility: hidden; position: absolute':''}" id="pm_pedidosEmpresa" value="Reservas" icon="fa fa-history" outcome="/empresa/reservas" />
                                
                             <p:submenu style="visibility: hidden; position: absolute" id="pm_pedidos" label="Pedidos" icon="fa fa-cutlery">
                                 <p:menuitem id="pm_aberto" value="Em Aberto" icon="fa fa-file-text" outcome="/empresa/index" />
